@@ -10,6 +10,10 @@
     "generate:api": "apicraft generate"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-progress": "^1.1.8",
+    "@radix-ui/react-select": "^2.2.6",
+    "@radix-ui/react-slot": "^1.2.4",
     "@siberiacancode/fetches": "^1.13.2",
     "@tanstack/react-query": "^5.90.20",
     "class-variance-authority": "^0.7.1",
@@ -17,9 +21,11 @@
     "lucide-react": "^0.563.0",
     "next": "16.1.5",
     "next-intl": "^4.7.0",
+    "next-themes": "^0.4.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "tailwind-merge": "^3.4.0",
+    "vaul": "^1.1.2",
     "zod": "^4.3.6"
   },
   "devDependencies": {
