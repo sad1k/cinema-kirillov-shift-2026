@@ -1,4 +1,4 @@
-import antfu from "@antfu/eslint-config";
+import antfu from '@antfu/eslint-config'
 
 export default antfu({
   nextjs: true,
@@ -8,12 +8,22 @@ export default antfu({
 
   stylistic: {
     indent: 2,
-    quotes: "single",
+    quotes: 'single',
   },
 
   formatters: {
     css: true,
   },
 
-  ignores: ["next-env.d.ts"],
-});
+  ignores: [
+    'next-env.d.ts',
+    'node_modules',
+    'pnpm-lock.yaml',
+    'pnpm-workspace.yaml',
+    'postcss.config.mjs',
+    'tailwind.config.ts',
+    'tsconfig.json',
+    'eslint.config.mjs',
+    './src/shared/api/generated',
+  ],
+})
