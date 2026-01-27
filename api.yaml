@@ -6,8 +6,8 @@ paths:
       summary: главная страница
       parameters: []
       responses:
-        "200":
-          description: ""
+        '200':
+          description: ''
       tags:
         - pages
   /api/otps:
@@ -16,8 +16,8 @@ paths:
       summary: страница с отп кодами
       parameters: []
       responses:
-        "200":
-          description: ""
+        '200':
+          description: ''
       tags:
         - pages
   /api/android/loans:
@@ -26,14 +26,14 @@ paths:
       summary: получить займы
       parameters: []
       responses:
-        "200":
+        '200':
           description: loan feed
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/LoanFeedItem"
+                  $ref: '#/components/schemas/LoanFeedItem'
       tags:
         - 🤖 android
   /api/android/loans/{loanId}:
@@ -48,12 +48,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: loan
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Loan"
+                $ref: '#/components/schemas/Loan'
       tags:
         - 🤖 android
   /api/tester/session:
@@ -66,12 +66,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: session
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SessionResponse"
+                $ref: '#/components/schemas/SessionResponse'
       tags:
         - 🧪 tester
       security:
@@ -90,14 +90,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateProfileDto"
+              $ref: '#/components/schemas/UpdateProfileDto'
       responses:
-        "200":
+        '200':
           description: update profile
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UpdateProfileResponse"
+                $ref: '#/components/schemas/UpdateProfileResponse'
       tags:
         - 🧪 tester
       security:
@@ -112,14 +112,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateOtpDto"
+              $ref: '#/components/schemas/CreateOtpDto'
       responses:
-        "200":
+        '200':
           description: create otp
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OtpResponse"
+                $ref: '#/components/schemas/OtpResponse'
       tags:
         - 🧪 tester
   /api/tester/signin:
@@ -132,14 +132,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SignInDto"
+              $ref: '#/components/schemas/SignInDto'
       responses:
-        "200":
+        '200':
           description: signin
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SignInResponse"
+                $ref: '#/components/schemas/SignInResponse'
       tags:
         - 🧪 tester
   /api/users/signin:
@@ -152,14 +152,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SignInDto"
+              $ref: '#/components/schemas/SignInDto'
       responses:
-        "200":
+        '200':
           description: signin
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SignInResponse"
+                $ref: '#/components/schemas/SignInResponse'
       tags:
         - 💂‍♂️ users
   /api/users/profile:
@@ -176,14 +176,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UpdateProfileDto"
+              $ref: '#/components/schemas/UpdateProfileDto'
       responses:
-        "200":
+        '200':
           description: update profile
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UpdateProfileResponse"
+                $ref: '#/components/schemas/UpdateProfileResponse'
       tags:
         - 💂‍♂️ users
       security:
@@ -198,12 +198,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: session
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SessionResponse"
+                $ref: '#/components/schemas/SessionResponse'
       tags:
         - 💂‍♂️ users
       security:
@@ -218,14 +218,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateOtpDto"
+              $ref: '#/components/schemas/CreateOtpDto'
       responses:
-        "200":
+        '200':
           description: create otp
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OtpResponse"
+                $ref: '#/components/schemas/OtpResponse'
       tags:
         - ☄️ otps
   /api/cinema/films:
@@ -234,12 +234,12 @@ paths:
       summary: Получить список фильмов
       parameters: []
       responses:
-        "200":
+        '200':
           description: films
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FilmsResponse"
+                $ref: '#/components/schemas/FilmsResponse'
       tags:
         - 🍿 cinema
   /api/cinema/film/{filmId}:
@@ -254,12 +254,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: film
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/FilmResponse"
+                $ref: '#/components/schemas/FilmResponse'
       tags:
         - 🍿 cinema
   /api/cinema/film/{filmId}/schedule:
@@ -274,12 +274,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: schedule
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ScheduleResponse"
+                $ref: '#/components/schemas/ScheduleResponse'
       tags:
         - 🍿 cinema
   /api/cinema/payment:
@@ -292,14 +292,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateCinemaPaymentDto"
+              $ref: '#/components/schemas/CreateCinemaPaymentDto'
       responses:
-        "200":
+        '200':
           description: payment
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentResponse"
+                $ref: '#/components/schemas/PaymentResponse'
       tags:
         - 🍿 cinema
   /api/cinema/orders:
@@ -312,12 +312,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: orders
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CinemaOrdersResponse"
+                $ref: '#/components/schemas/CinemaOrdersResponse'
       tags:
         - 🍿 cinema
       security:
@@ -336,14 +336,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CancelCinemaOrderDto"
+              $ref: '#/components/schemas/CancelCinemaOrderDto'
       responses:
-        "200":
+        '200':
           description: order cancel
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BaseResponse"
+                $ref: '#/components/schemas/BaseResponse'
       tags:
         - 🍿 cinema
       security:
@@ -354,12 +354,12 @@ paths:
       summary: Получить пункты выдачи
       parameters: []
       responses:
-        "200":
+        '200':
           description: points
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DeliveryPointsResponse"
+                $ref: '#/components/schemas/DeliveryPointsResponse'
       tags:
         - 📦 delivery
   /api/delivery/package/types:
@@ -368,12 +368,12 @@ paths:
       summary: Получить типы посылок
       parameters: []
       responses:
-        "200":
+        '200':
           description: package types
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DeliveryPackageTypesResponse"
+                $ref: '#/components/schemas/DeliveryPackageTypesResponse'
       tags:
         - 📦 delivery
   /api/delivery/calc:
@@ -386,14 +386,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CalculateDeliveryDto"
+              $ref: '#/components/schemas/CalculateDeliveryDto'
       responses:
-        "200":
+        '200':
           description: calc
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CalculateDeliveryResponse"
+                $ref: '#/components/schemas/CalculateDeliveryResponse'
       tags:
         - 📦 delivery
   /api/delivery/order:
@@ -406,14 +406,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateDeliveryOrderDto"
+              $ref: '#/components/schemas/CreateDeliveryOrderDto'
       responses:
-        "200":
+        '200':
           description: order
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DeliverResponse"
+                $ref: '#/components/schemas/DeliverResponse'
       tags:
         - 📦 delivery
   /api/delivery/orders:
@@ -426,12 +426,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: orders
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DeliveryOrdersResponse"
+                $ref: '#/components/schemas/DeliveryOrdersResponse'
       tags:
         - 📦 delivery
       security:
@@ -452,12 +452,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: order
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/DeliveryOrderResponse"
+                $ref: '#/components/schemas/DeliveryOrderResponse'
       tags:
         - 📦 delivery
       security:
@@ -476,14 +476,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CancelDeliveryOrderDto"
+              $ref: '#/components/schemas/CancelDeliveryOrderDto'
       responses:
-        "200":
+        '200':
           description: order cancel
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BaseResponse"
+                $ref: '#/components/schemas/BaseResponse'
       tags:
         - 📦 delivery
       security:
@@ -576,12 +576,12 @@ paths:
           schema:
             type: number
       responses:
-        "200":
-          description: ""
+        '200':
+          description: ''
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CarsPaginatedResponse"
+                $ref: '#/components/schemas/CarsPaginatedResponse'
       tags:
         - 🏎️ cars
   /api/cars/info/{carId}:
@@ -596,12 +596,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: car with rents
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CarResponse"
+                $ref: '#/components/schemas/CarResponse'
       tags:
         - 🏎️ cars
   /api/cars/rent:
@@ -614,14 +614,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateRentDto"
+              $ref: '#/components/schemas/CreateRentDto'
       responses:
-        "200":
+        '200':
           description: create rent
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CarRentResponse"
+                $ref: '#/components/schemas/CarRentResponse'
       tags:
         - 🏎️ cars
     get:
@@ -633,12 +633,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: rents
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CarRentsResponse"
+                $ref: '#/components/schemas/CarRentsResponse'
       tags:
         - 🏎️ cars
       security:
@@ -659,12 +659,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: rent
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CarRent"
+                $ref: '#/components/schemas/CarRent'
       tags:
         - 🏎️ cars
       security:
@@ -683,14 +683,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CancelCarRentDto"
+              $ref: '#/components/schemas/CancelCarRentDto'
       responses:
-        "200":
+        '200':
           description: rent cancel
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BaseResponse"
+                $ref: '#/components/schemas/BaseResponse'
       tags:
         - 🏎️ cars
       security:
@@ -701,12 +701,12 @@ paths:
       summary: Получить пиццы
       parameters: []
       responses:
-        "200":
+        '200':
           description: catalog
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PizzasResponse"
+                $ref: '#/components/schemas/PizzasResponse'
       tags:
         - 🍕 pizza
   /api/pizza/payment:
@@ -719,14 +719,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreatePizzaPaymentDto"
+              $ref: '#/components/schemas/CreatePizzaPaymentDto'
       responses:
-        "200":
+        '200':
           description: payment
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PizzaPaymentResponse"
+                $ref: '#/components/schemas/PizzaPaymentResponse'
       tags:
         - 🍕 pizza
   /api/pizza/orders:
@@ -739,12 +739,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: orders
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PizzaOrdersResponse"
+                $ref: '#/components/schemas/PizzaOrdersResponse'
       tags:
         - 🍕 pizza
       security:
@@ -765,12 +765,12 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        '200':
           description: order
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PizzaOrderResponse"
+                $ref: '#/components/schemas/PizzaOrderResponse'
       tags:
         - 🍕 pizza
       security:
@@ -789,14 +789,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CancelPizzaOrderDto"
+              $ref: '#/components/schemas/CancelPizzaOrderDto'
       responses:
-        "200":
+        '200':
           description: order cancel
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BaseResponse"
+                $ref: '#/components/schemas/BaseResponse'
       tags:
         - 🍕 pizza
       security:
@@ -804,7 +804,7 @@ paths:
 info:
   title: shift backend 🔥
   description: Апи для выполнения индивидуальных заданий
-  version: "1.0"
+  version: '1.0'
   contact: {}
 tags: []
 servers:
@@ -887,7 +887,7 @@ components:
             - REJECTED
         phone:
           type: string
-          example: "+77259786293"
+          example: '+77259786293'
           description: Номер телефона
         date:
           type: string
@@ -915,7 +915,7 @@ components:
           description: ID пользователя
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Номер телефона
         firstname:
           type: string
@@ -952,7 +952,7 @@ components:
         user:
           description: Пользователь
           allOf:
-            - $ref: "#/components/schemas/User"
+            - $ref: '#/components/schemas/User'
       required:
         - success
         - user
@@ -985,10 +985,10 @@ components:
         profile:
           description: Данные пользователя
           allOf:
-            - $ref: "#/components/schemas/UpdateProfileProfileDto"
+            - $ref: '#/components/schemas/UpdateProfileProfileDto'
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Номер телефона
       required:
         - profile
@@ -1005,7 +1005,7 @@ components:
         user:
           description: Пользователь
           allOf:
-            - $ref: "#/components/schemas/User"
+            - $ref: '#/components/schemas/User'
       required:
         - success
         - user
@@ -1014,7 +1014,7 @@ components:
       properties:
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
       required:
         - phone
     OtpResponse:
@@ -1038,7 +1038,7 @@ components:
       properties:
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Номер телефона
         code:
           type: number
@@ -1059,7 +1059,7 @@ components:
         user:
           description: Пользователь
           allOf:
-            - $ref: "#/components/schemas/User"
+            - $ref: '#/components/schemas/User'
         token:
           type: string
           description: Пользовательский токен
@@ -1072,7 +1072,7 @@ components:
       properties:
         id:
           type: string
-          example: "1"
+          example: '1'
           description: Идентификатор персоны
         professions:
           type: string
@@ -1092,11 +1092,11 @@ components:
       properties:
         kinopoisk:
           type: string
-          example: "10"
+          example: '10'
           description: Рейтинг кинопоиск
         imdb:
           type: string
-          example: "10"
+          example: '10'
           description: Рейтинг imdb
       required:
         - kinopoisk
@@ -1122,7 +1122,7 @@ components:
       properties:
         id:
           type: string
-          example: "1"
+          example: '1'
           description: Идентификатор фильма
         name:
           type: string
@@ -1140,12 +1140,12 @@ components:
           description: Актеры
           type: array
           items:
-            $ref: "#/components/schemas/FilmStaff"
+            $ref: '#/components/schemas/FilmStaff'
         directors:
           description: Режиссер
           type: array
           items:
-            $ref: "#/components/schemas/FilmStaff"
+            $ref: '#/components/schemas/FilmStaff'
         runtime:
           type: number
           description: Продолжительность
@@ -1165,7 +1165,7 @@ components:
         userRatings:
           description: Рейтинг пользователей
           allOf:
-            - $ref: "#/components/schemas/FilmUserRating"
+            - $ref: '#/components/schemas/FilmUserRating'
         img:
           type: string
           description: Изображение фильма
@@ -1173,7 +1173,7 @@ components:
           description: Страна
           nullable: true
           allOf:
-            - $ref: "#/components/schemas/Country"
+            - $ref: '#/components/schemas/Country'
       required:
         - id
         - name
@@ -1200,7 +1200,7 @@ components:
           description: Фильмы
           type: array
           items:
-            $ref: "#/components/schemas/Film"
+            $ref: '#/components/schemas/Film'
       required:
         - success
         - films
@@ -1216,7 +1216,7 @@ components:
         film:
           description: Фильм
           allOf:
-            - $ref: "#/components/schemas/Film"
+            - $ref: '#/components/schemas/Film'
       required:
         - success
         - film
@@ -1229,7 +1229,8 @@ components:
           description: Название зала
         places:
           example:
-            - - type: ECONOM
+            -
+              - type: ECONOM
                 price: 100
           description: Места в зале
           items:
@@ -1248,7 +1249,7 @@ components:
         hall:
           description: Зал
           allOf:
-            - $ref: "#/components/schemas/FilmHall"
+            - $ref: '#/components/schemas/FilmHall'
       required:
         - time
         - hall
@@ -1263,7 +1264,7 @@ components:
           description: Сеансы
           type: array
           items:
-            $ref: "#/components/schemas/FilmScheduleSeance"
+            $ref: '#/components/schemas/FilmScheduleSeance'
       required:
         - date
         - seances
@@ -1279,7 +1280,7 @@ components:
         schedules:
           description: Расписание
           allOf:
-            - $ref: "#/components/schemas/FilmSchedule"
+            - $ref: '#/components/schemas/FilmSchedule'
       required:
         - success
         - schedules
@@ -1300,7 +1301,7 @@ components:
           description: Отчество
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Телефон
       required:
         - firstname
@@ -1320,7 +1321,7 @@ components:
           description: Срок действие карты
         cvv:
           type: string
-          example: "111"
+          example: '111'
           description: Код карты
       required:
         - pan
@@ -1363,20 +1364,20 @@ components:
         person:
           description: Покупатель
           allOf:
-            - $ref: "#/components/schemas/CreatePaymentPersonDto"
+            - $ref: '#/components/schemas/CreatePaymentPersonDto'
         debitCard:
           description: Банковская карта
           allOf:
-            - $ref: "#/components/schemas/CreatePaymentDebitCardDto"
+            - $ref: '#/components/schemas/CreatePaymentDebitCardDto'
         seance:
           description: Сеанс фильма
           allOf:
-            - $ref: "#/components/schemas/CreatePaymentSeanceDto"
+            - $ref: '#/components/schemas/CreatePaymentSeanceDto'
         tickets:
           description: Билеты
           type: array
           items:
-            $ref: "#/components/schemas/CreatePaymentTicketsDto"
+            $ref: '#/components/schemas/CreatePaymentTicketsDto'
       required:
         - filmId
         - person
@@ -1420,10 +1421,10 @@ components:
         seance:
           description: Сеанс фильма
           allOf:
-            - $ref: "#/components/schemas/CinemaTicketSeance"
+            - $ref: '#/components/schemas/CinemaTicketSeance'
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Телефон
         status:
           type: string
@@ -1457,7 +1458,7 @@ components:
           description: Отчество
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Телефон
       required:
         - firstname
@@ -1473,7 +1474,7 @@ components:
         film:
           description: Название фильма
           allOf:
-            - $ref: "#/components/schemas/Film"
+            - $ref: '#/components/schemas/Film'
         orderNumber:
           type: number
           description: Номер заказа
@@ -1481,11 +1482,11 @@ components:
           description: Билеты
           type: array
           items:
-            $ref: "#/components/schemas/CinemaTicket"
+            $ref: '#/components/schemas/CinemaTicket'
         person:
           description: Данные пользователя
           allOf:
-            - $ref: "#/components/schemas/FilmPerson"
+            - $ref: '#/components/schemas/FilmPerson'
         status:
           type: string
           description: Статус заказа
@@ -1511,7 +1512,7 @@ components:
         order:
           description: Заказ
           allOf:
-            - $ref: "#/components/schemas/CinemaOrder"
+            - $ref: '#/components/schemas/CinemaOrder'
       required:
         - success
         - order
@@ -1528,7 +1529,7 @@ components:
           description: Заказы
           type: array
           items:
-            $ref: "#/components/schemas/CinemaOrder"
+            $ref: '#/components/schemas/CinemaOrder'
       required:
         - success
         - orders
@@ -1556,7 +1557,7 @@ components:
       properties:
         id:
           type: string
-          example: "1"
+          example: '1'
           description: Индентификатор пункта
         name:
           type: string
@@ -1588,7 +1589,7 @@ components:
           description: Пункты доставки
           type: array
           items:
-            $ref: "#/components/schemas/DeliveryPoint"
+            $ref: '#/components/schemas/DeliveryPoint'
       required:
         - success
         - points
@@ -1636,10 +1637,10 @@ components:
           type: string
           description: Причина ошибки
         packages:
-          description: "Типы "
+          description: 'Типы '
           type: array
           items:
-            $ref: "#/components/schemas/DeliveryPackageType"
+            $ref: '#/components/schemas/DeliveryPackageType'
       required:
         - success
         - packages
@@ -1687,15 +1688,15 @@ components:
         package:
           description: Поссылка
           allOf:
-            - $ref: "#/components/schemas/CalculateDeliveryPackageDto"
+            - $ref: '#/components/schemas/CalculateDeliveryPackageDto'
         senderPoint:
           description: Город отправки
           allOf:
-            - $ref: "#/components/schemas/CalculateDeliveryPointDto"
+            - $ref: '#/components/schemas/CalculateDeliveryPointDto'
         receiverPoint:
           description: Город получения
           allOf:
-            - $ref: "#/components/schemas/CalculateDeliveryPointDto"
+            - $ref: '#/components/schemas/CalculateDeliveryPointDto'
       required:
         - package
         - senderPoint
@@ -1705,7 +1706,7 @@ components:
       properties:
         id:
           type: string
-          example: "1"
+          example: '1'
           description: Индентификатор опции доставки
         price:
           type: number
@@ -1745,7 +1746,7 @@ components:
           description: Опции доставки
           type: array
           items:
-            $ref: "#/components/schemas/DeliveryOption"
+            $ref: '#/components/schemas/DeliveryOption'
       required:
         - success
         - options
@@ -1789,7 +1790,7 @@ components:
           description: Отчество
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Телефон
       required:
         - firstname
@@ -1839,22 +1840,22 @@ components:
         senderAddress:
           description: Адрес отправителя
           allOf:
-            - $ref: "#/components/schemas/CreateDeliveryOrderSenderAddressDto"
+            - $ref: '#/components/schemas/CreateDeliveryOrderSenderAddressDto'
         sender:
           description: Отправитель
           allOf:
-            - $ref: "#/components/schemas/CreateDeliveryOrderPersonDto"
+            - $ref: '#/components/schemas/CreateDeliveryOrderPersonDto'
         receiverPointId:
           type: string
           description: Идентификатор города получения
         receiverAddress:
           description: Адрес получателя
           allOf:
-            - $ref: "#/components/schemas/CreateDeliveryOrderReceiverAddressDto"
+            - $ref: '#/components/schemas/CreateDeliveryOrderReceiverAddressDto'
         receiver:
           description: Получатель
           allOf:
-            - $ref: "#/components/schemas/CreateDeliveryOrderPersonDto"
+            - $ref: '#/components/schemas/CreateDeliveryOrderPersonDto'
         payer:
           type: string
           description: Кто будет оплачивать
@@ -1912,7 +1913,7 @@ components:
           description: Отчество
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Телефон
       required:
         - firstname
@@ -1958,7 +1959,7 @@ components:
         package:
           description: Тип посылки
           allOf:
-            - $ref: "#/components/schemas/DeliveryPackageType"
+            - $ref: '#/components/schemas/DeliveryPackageType'
         option:
           type: string
           description: Тип доставки
@@ -1968,27 +1969,27 @@ components:
         senderPoint:
           description: Город отправки
           allOf:
-            - $ref: "#/components/schemas/DeliveryPoint"
+            - $ref: '#/components/schemas/DeliveryPoint'
         senderAddress:
           description: Адрес отправителя
           allOf:
-            - $ref: "#/components/schemas/DeliverySenderAddress"
+            - $ref: '#/components/schemas/DeliverySenderAddress'
         sender:
           description: Отправитель
           allOf:
-            - $ref: "#/components/schemas/DeliveryPerson"
+            - $ref: '#/components/schemas/DeliveryPerson'
         receiverPoint:
           description: Город получения
           allOf:
-            - $ref: "#/components/schemas/DeliveryPoint"
+            - $ref: '#/components/schemas/DeliveryPoint'
         receiverAddress:
           description: Адрес получателя
           allOf:
-            - $ref: "#/components/schemas/DeliveryReceiverAddress"
+            - $ref: '#/components/schemas/DeliveryReceiverAddress'
         receiver:
           description: Получатель
           allOf:
-            - $ref: "#/components/schemas/DeliveryPerson"
+            - $ref: '#/components/schemas/DeliveryPerson'
         payer:
           type: string
           description: Кто будет оплачивать
@@ -2033,7 +2034,7 @@ components:
         order:
           description: Доставка
           allOf:
-            - $ref: "#/components/schemas/DeliveryOrder"
+            - $ref: '#/components/schemas/DeliveryOrder'
       required:
         - success
         - order
@@ -2050,7 +2051,7 @@ components:
           description: Доставки
           type: array
           items:
-            $ref: "#/components/schemas/DeliveryOrder"
+            $ref: '#/components/schemas/DeliveryOrder'
       required:
         - success
         - orders
@@ -2066,7 +2067,7 @@ components:
         order:
           description: Доставка
           allOf:
-            - $ref: "#/components/schemas/DeliveryOrder"
+            - $ref: '#/components/schemas/DeliveryOrder'
       required:
         - success
         - order
@@ -2095,7 +2096,7 @@ components:
       properties:
         id:
           type: string
-          example: "1"
+          example: '1'
           description: ID автомобиля
         name:
           type: string
@@ -2118,7 +2119,7 @@ components:
         media:
           type: array
           items:
-            $ref: "#/components/schemas/Media"
+            $ref: '#/components/schemas/Media'
         transmission:
           type: string
           enum:
@@ -2207,11 +2208,11 @@ components:
           description: Массив автомобилей с информацией
           type: array
           items:
-            $ref: "#/components/schemas/Car"
+            $ref: '#/components/schemas/Car'
         meta:
           description: Метаданные пагинации (общее количество, текущая страница и т.д.)
           allOf:
-            - $ref: "#/components/schemas/PaginationMeta"
+            - $ref: '#/components/schemas/PaginationMeta'
       required:
         - success
         - data
@@ -2235,7 +2236,7 @@ components:
       properties:
         id:
           type: string
-          example: "1"
+          example: '1'
           description: ID автомобиля
         name:
           type: string
@@ -2258,7 +2259,7 @@ components:
         media:
           type: array
           items:
-            $ref: "#/components/schemas/Media"
+            $ref: '#/components/schemas/Media'
         transmission:
           type: string
           enum:
@@ -2303,7 +2304,7 @@ components:
           description: Занятые промежутки дат (timestamp)
           type: array
           items:
-            $ref: "#/components/schemas/BookedDateRange"
+            $ref: '#/components/schemas/BookedDateRange'
       required:
         - id
         - name
@@ -2328,7 +2329,7 @@ components:
         data:
           description: Данные автомобиля с арендованными датами
           allOf:
-            - $ref: "#/components/schemas/CarWithRents"
+            - $ref: '#/components/schemas/CarWithRents'
       required:
         - success
         - data
@@ -2377,7 +2378,7 @@ components:
           description: Email арендатора
         phone:
           type: string
-          example: "79876543210"
+          example: '79876543210'
           description: Телефон арендатора в формате 7XXXXXXXXXX
         comment:
           type: string
@@ -2402,7 +2403,7 @@ components:
           description: ID заказа
         carInfo:
           example:
-            id: "12"
+            id: '12'
             name: Kia Rio 1.4 AT
             brand: Kia
             img: /static/images/cars/kia-rio-black.webp
@@ -2414,10 +2415,10 @@ components:
             steering: left
           description: Информация об автомобиле
           allOf:
-            - $ref: "#/components/schemas/Car"
+            - $ref: '#/components/schemas/Car'
         status:
           type: number
-          example: "0"
+          example: '0'
           description: Статус брони
           enum:
             - 0
@@ -2464,7 +2465,7 @@ components:
           description: Email арендатора
         phone:
           type: string
-          example: "79991234567"
+          example: '79991234567'
           description: Телефон арендатора (совпадает с номером пользователя)
         comment:
           type: string
@@ -2496,7 +2497,7 @@ components:
         rent:
           description: Аренда
           allOf:
-            - $ref: "#/components/schemas/CarRent"
+            - $ref: '#/components/schemas/CarRent'
       required:
         - success
         - rent
@@ -2513,7 +2514,7 @@ components:
           description: Аренды
           type: array
           items:
-            $ref: "#/components/schemas/CarRent"
+            $ref: '#/components/schemas/CarRent'
       required:
         - success
         - rents
@@ -2596,7 +2597,7 @@ components:
       properties:
         id:
           type: string
-          example: "1"
+          example: '1'
           description: Идентификатор пиццы
         name:
           type: string
@@ -2605,12 +2606,12 @@ components:
           description: Ингредиенты
           type: array
           items:
-            $ref: "#/components/schemas/PizzaIngredient"
+            $ref: '#/components/schemas/PizzaIngredient'
         toppings:
           description: Топпинги
           type: array
           items:
-            $ref: "#/components/schemas/PizzaIngredient"
+            $ref: '#/components/schemas/PizzaIngredient'
         description:
           type: string
           description: Описание пиццы
@@ -2618,12 +2619,12 @@ components:
           description: Размеры пиццы
           type: array
           items:
-            $ref: "#/components/schemas/PizzaSize"
+            $ref: '#/components/schemas/PizzaSize'
         doughs:
           description: Тип теста
           type: array
           items:
-            $ref: "#/components/schemas/PizzaDough"
+            $ref: '#/components/schemas/PizzaDough'
         calories:
           type: number
           description: Количество калорий
@@ -2691,7 +2692,7 @@ components:
           description: Пиццы
           type: array
           items:
-            $ref: "#/components/schemas/Pizza"
+            $ref: '#/components/schemas/Pizza'
       required:
         - success
         - catalog
@@ -2735,7 +2736,7 @@ components:
           description: Отчество
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Телефон
       required:
         - firstname
@@ -2754,7 +2755,7 @@ components:
           description: Срок действие карты
         cvv:
           type: string
-          example: "111"
+          example: '111'
           description: Код карты
       required:
         - pan
@@ -2765,7 +2766,7 @@ components:
       properties:
         id:
           type: string
-          example: "1"
+          example: '1'
           description: Идентификатор пиццы
         toppings:
           type: array
@@ -2820,20 +2821,20 @@ components:
         receiverAddress:
           description: Адрес доставки
           allOf:
-            - $ref: "#/components/schemas/CreatePizzaPaymentAddressDto"
+            - $ref: '#/components/schemas/CreatePizzaPaymentAddressDto'
         person:
           description: Данные пользователя
           allOf:
-            - $ref: "#/components/schemas/CreatePizzaPaymentPersonDto"
+            - $ref: '#/components/schemas/CreatePizzaPaymentPersonDto'
         debitCard:
           description: Банковская карта
           allOf:
-            - $ref: "#/components/schemas/CreatePizzaPaymentDebitCardDto"
+            - $ref: '#/components/schemas/CreatePizzaPaymentDebitCardDto'
         pizzas:
           description: Пиццы
           type: array
           items:
-            $ref: "#/components/schemas/OrderedPizza"
+            $ref: '#/components/schemas/OrderedPizza'
       required:
         - receiverAddress
         - person
@@ -2856,7 +2857,7 @@ components:
           description: Отчество
         phone:
           type: string
-          example: "89990009999"
+          example: '89990009999'
           description: Телефон
       required:
         - firstname
@@ -2897,18 +2898,18 @@ components:
           description: Пиццы
           type: array
           items:
-            $ref: "#/components/schemas/Pizza"
+            $ref: '#/components/schemas/Pizza'
         totalPrice:
           type: number
           description: Сумма заказа
         person:
           description: Данные пользователя
           allOf:
-            - $ref: "#/components/schemas/PizzaPerson"
+            - $ref: '#/components/schemas/PizzaPerson'
         receiverAddress:
           description: Адрес доставки
           allOf:
-            - $ref: "#/components/schemas/PizzaAddress"
+            - $ref: '#/components/schemas/PizzaAddress'
         status:
           type: number
           description: Статус доставки
@@ -2941,7 +2942,7 @@ components:
         order:
           description: Доставка
           allOf:
-            - $ref: "#/components/schemas/PizzaOrder"
+            - $ref: '#/components/schemas/PizzaOrder'
       required:
         - success
         - order
@@ -2958,7 +2959,7 @@ components:
           description: Доставки
           type: array
           items:
-            $ref: "#/components/schemas/PizzaOrder"
+            $ref: '#/components/schemas/PizzaOrder'
       required:
         - success
         - orders
@@ -2974,7 +2975,7 @@ components:
         order:
           description: Доставки
           allOf:
-            - $ref: "#/components/schemas/PizzaOrder"
+            - $ref: '#/components/schemas/PizzaOrder'
       required:
         - success
         - order
