@@ -1,14 +1,8 @@
 {
   "common": {
-    "testCommon": "testValue",
-    "addPet": "Add Pet",
-    "loginSignUp": "Login / Sign up",
-    "loadMorePets": "Load more Pets",
-    "navigation": {
-      "home": "Home",
-      "contest": "Contest",
-      "leaderboard": "Leaderboard",
-      "myPets": "My Pets"
-    }
+    "login": "Log in",
+    "details": "Details",
+    "film": "Movie",
+    "kinopoisk": "Kinopoisk"
   }
 }

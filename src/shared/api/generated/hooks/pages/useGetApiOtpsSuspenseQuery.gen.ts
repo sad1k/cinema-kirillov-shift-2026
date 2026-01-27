@@ -4,7 +4,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 
 import type { TanstackSuspenseQuerySettings } from "@siberiacancode/apicraft";
 
-import { getApiOtps } from "..\\..\\requests\\pages\\getApiOtps.gen";
+import { getApiOtps } from "../../requests/pages/getApiOtps.gen";
 
 export const getApiOtpsOptions = (settings?: TanstackSuspenseQuerySettings<typeof getApiOtps>) => queryOptions({
     queryKey: ["getApiOtps"],

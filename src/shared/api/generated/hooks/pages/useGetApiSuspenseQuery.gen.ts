@@ -4,7 +4,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 
 import type { TanstackSuspenseQuerySettings } from "@siberiacancode/apicraft";
 
-import { getApi } from "..\\..\\requests\\pages\\getApi.gen";
+import { getApi } from "../../requests/pages/getApi.gen";
 
 export const getApiOptions = (settings?: TanstackSuspenseQuerySettings<typeof getApi>) => queryOptions({
     queryKey: ["getApi"],

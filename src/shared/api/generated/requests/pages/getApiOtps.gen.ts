@@ -2,7 +2,7 @@
 
 import type { FetchesRequestParams } from "@siberiacancode/apicraft";
 
-import type { AppControllerOtpsData } from "..\\..\\types.gen";
+import type { AppControllerOtpsData } from "../../types.gen";
 import { instance } from "@/shared/api/fetches";
 
 
