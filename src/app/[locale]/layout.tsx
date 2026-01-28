@@ -27,7 +27,7 @@ export default async function LocaleLayout({
       <NextIntlClientProvider messages={messages}>
         <LayoutClient>
           <Header />
-          <main className="mx-auto max-w-[960px] px-4 py-6">
+          <main className="mx-auto max-w-[960px] px-4">
             {children}
           </main>
         </LayoutClient>

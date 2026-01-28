@@ -1,14 +1,12 @@
 {
   "films": {
-    "about": "О фильме",
-    "sessions": "Сеансы",
-    "reviews": "Отзывы",
-    "actors": "Актёры",
-    "directors": "Режиссёры",
-    "runtime": "Время",
-    "minutes": "мин",
-    "notFound": "Фильм не найден",
-    "sessionsError": "Не удалось загрузить расписание",
-    "reviewsPlaceholder": "Отзывы скоро появятся"
+    "schedule": "Расписание",
+    "noSessions": "Нет сеансов",
+    "noSessionsOnDate": "Нет сеансов на эту дату",
+    "Red": "Красный зал",
+    "Blue": "Синий зал",
+    "Purple": "Фиолетовый зал",
+    "Green": "Зеленый зал",
+    "hallName": "{name}"
   }
 }
