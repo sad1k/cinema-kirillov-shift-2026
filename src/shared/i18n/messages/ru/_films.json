@@ -1,0 +1,14 @@
+{
+  "films": {
+    "about": "О фильме",
+    "sessions": "Сеансы",
+    "reviews": "Отзывы",
+    "actors": "Актёры",
+    "directors": "Режиссёры",
+    "runtime": "Время",
+    "minutes": "мин",
+    "notFound": "Фильм не найден",
+    "sessionsError": "Не удалось загрузить расписание",
+    "reviewsPlaceholder": "Отзывы скоро появятся"
+  }
+}

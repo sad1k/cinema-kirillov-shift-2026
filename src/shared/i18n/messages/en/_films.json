@@ -1,0 +1,14 @@
+{
+  "films": {
+    "about": "About film",
+    "sessions": "Sessions",
+    "reviews": "Reviews",
+    "actors": "Actors",
+    "directors": "Directors",
+    "runtime": "Runtime",
+    "minutes": "min",
+    "notFound": "Film not found",
+    "sessionsError": "Unable to load schedule",
+    "reviewsPlaceholder": "Reviews will be available soon"
+  }
+}
