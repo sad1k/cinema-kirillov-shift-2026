@@ -2,7 +2,7 @@
 
 import type { FetchesRequestParams } from "@siberiacancode/apicraft";
 
-import type { AppControllerMainData } from "..\\..\\types.gen";
+import type { AppControllerMainData } from "../../types.gen";
 import { instance } from "@/shared/api/fetches";
 
 export type GetApiRequestParams = FetchesRequestParams<AppControllerMainData>;

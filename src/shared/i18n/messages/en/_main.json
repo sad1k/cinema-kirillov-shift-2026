@@ -1,5 +1,12 @@
 {
   "main": {
-    "testKey": "testValue"
+    "home": {
+      "title": "Schedule",
+      "error": "Failed to load films",
+      "meta": {
+        "title": "SHIFT CINEMA - Schedule",
+        "description": "Watch the best movies at SHIFT CINEMA"
+      }
+    }
   }
 }

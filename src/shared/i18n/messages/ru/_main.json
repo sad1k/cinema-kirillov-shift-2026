@@ -1,5 +1,12 @@
 {
   "main": {
-    "testKey": "testValue"
+    "home": {
+      "title": "Афиша",
+      "error": "Не удалось загрузить фильмы",
+      "meta": {
+        "title": "ШИФТ CINEMA - Афиша",
+        "description": "Смотрите лучшие фильмы в кинотеатре ШИФТ CINEMA"
+      }
+    }
   }
 }
