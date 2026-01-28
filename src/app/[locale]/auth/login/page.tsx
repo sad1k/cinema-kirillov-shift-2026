@@ -1,86 +1,97 @@
 'use client'
 
+import type { ResponseError } from '@siberiacancode/fetches'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 
-import { postApiAuthOtp, postApiUsersSignin } from '@/shared/api/generated'
+import { z } from 'zod'
+import { usePostApiAuthOtpMutation, usePostApiUsersSigninMutation } from '@/shared/api/generated'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { useTypedI18n } from '@/shared/i18n/client/use-typed-i18n'
+import { useRouter } from '@/shared/i18n/i18n.routing'
 import { useSession } from '@/shared/session/session-provider'
-
-const phoneSchema = z.object({
-  phone: z.string().min(10, 'Phone number is required'),
-})
 
 const otpSchema = z.object({
   phone: z.string(),
-  code: z.coerce.number().min(1000, 'Code must be at least 4 digits'),
+  code: z.coerce.number({ message: 'Code must be a number' }).optional(),
 })
-
-type Step = 'PHONE' | 'OTP'
 
 export default function LoginPage() {
   const { t } = useTypedI18n('common')
   const router = useRouter()
   const { login } = useSession()
-  const [step, setStep] = useState<Step>('PHONE')
+  const [otpSent, setOtpSent] = useState(false)
 
   const {
     register,
     handleSubmit,
     getValues,
+    setError,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(step === 'PHONE' ? phoneSchema : otpSchema),
+    resolver: zodResolver(otpSchema),
     defaultValues: {
       phone: '',
-      code: '',
+      code: undefined,
     },
   })
 
-  const { mutate: sendOtp, isPending: isSendingOtp, error: otpError } = useMutation({
-    mutationFn: (phone: string) => postApiAuthOtp({ body: { phone } }),
-    onSuccess: (response) => {
-      if (response.data.success) {
-        setStep('OTP')
-      }
+  const { mutate: sendOtp, isPending: isSendingOtp, data: dataOtp } = usePostApiAuthOtpMutation({
+    params: {
+      onSuccess: (response) => {
+        const data = response.data
+        if (data.success) {
+          setOtpSent(true)
+        }
+      },
     },
   })
 
-  const { mutate: signIn, isPending: isSigningIn, error: signInError } = useMutation({
-    mutationFn: (data: { phone: string, code: number }) =>
-      postApiUsersSignin({ body: data }),
-    onSuccess: (response) => {
-      if (response.data.success && response.data.token && response.data.user) {
-        login(response.data.token, response.data.user)
-        router.push('/profile')
-      }
+  const otpError = dataOtp && !dataOtp?.data?.success
+
+  const { mutate: signIn, isPending: isSigningIn, data: dataSignIn } = usePostApiUsersSigninMutation({
+    params: {
+      onSuccess: (response) => {
+        const data = response.data
+        if (data.success && data.token && data.user) {
+          login(data.token, data.user)
+          router.push('/')
+        }
+      },
+      onError: (error: ResponseError) => {
+        if (error.response?.data?.reason) {
+          setError('code', {
+            type: 'server',
+            message: error.response.data.reason,
+          })
+        }
+      },
     },
   })
 
-  const onSubmit = (data: { phone: string, code: string | number }) => {
-    if (step === 'PHONE') {
-      sendOtp(data.phone)
+  const signInError = dataSignIn && !dataSignIn?.data?.success
+
+  const onSubmit = (data: { phone: string, code?: string | number }) => {
+    if (!otpSent) {
+      sendOtp({ body: { phone: data.phone } })
     }
     else {
-      signIn({ phone: data.phone, code: Number(data.code) })
+      signIn({ body: { phone: data.phone, code: Number(data.code) } })
     }
   }
 
-  const handleRetry = () => {
-    sendOtp(getValues('phone'))
+  const handleRetry = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    sendOtp({ body: { phone: getValues('phone') } })
   }
 
   return (
     <div className="mx-auto mt-20 max-w-[400px]">
       <div className="mb-8">
         <h1 className="mb-2 text-heading-2 font-bold">{t('login')}</h1>
-        {step === 'OTP' && (
+        {otpSent && (
           <p className="text-paragraph-14 text-muted-foreground">
             Введите проверочный код для входа в личный кабинет
           </p>
@@ -92,21 +103,21 @@ export default function LoginPage() {
           <Input
             {...register('phone')}
             placeholder="Телефон"
-            disabled={step === 'OTP'}
+            disabled={otpSent}
           />
           {errors.phone && (
             <p className="text-sm text-destructive">{String(errors.phone.message)}</p>
           )}
 
-          {step === 'OTP' && (
+          {otpSent && (
             <>
               <Input
                 {...register('code')}
                 placeholder="Проверочный код"
                 type="number"
               />
-              {errors.code && (
-                <p className="text-sm text-destructive">{String(errors.code.message)}</p>
+              {errors?.code && (
+                <p className="text-sm text-destructive">{String(errors?.code?.message)}</p>
               )}
             </>
           )}
@@ -114,7 +125,7 @@ export default function LoginPage() {
 
         {(otpError || signInError) && (
           <p className="text-sm text-destructive">
-            {otpError?.message || signInError?.message || 'Произошла ошибка'}
+            Произошла ошибка
           </p>
         )}
 
@@ -123,17 +134,18 @@ export default function LoginPage() {
           className="w-full bg-brand hover:bg-brand/90"
           disabled={isSendingOtp || isSigningIn}
         >
-          {step === 'PHONE' ? t('continue') : t('login')}
+          {otpSent ? t('login') : t('continue')}
         </Button>
 
-        {step === 'OTP' && (
-          <button
+        {otpSent && (
+          <Button
             type="button"
             onClick={handleRetry}
-            className="text-paragraph-14 text-muted-foreground underline hover:text-foreground"
+            variant="link"
+            className="text-paragraph-14 text-muted-foreground underline hover:text-foreground p-0"
           >
-            Отправить ещё раз
-          </button>
+            {t('retry')}
+          </Button>
         )}
       </form>
     </div>

@@ -9,6 +9,7 @@
     "expand": "expand",
     "profile": "Profile",
     "tickets": "Tickets",
-    "logout": "Log out"
+    "logout": "Log out",
+    "retry": "Send again"
   }
 }

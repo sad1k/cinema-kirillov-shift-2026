@@ -10,6 +10,7 @@ import { getApiUsersSession } from '@/shared/api/generated'
 interface SessionContextValue {
   isAuth: boolean
   user: User | null
+  isLoading: boolean
   login: (token: string, user: User) => void
   logout: () => void
 }
@@ -20,7 +21,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<User | null>(null)
   const [isAuth, setIsAuth] = useState(false)
 
-  const { data, isSuccess } = useQuery({
+  const { data, isSuccess, isLoading } = useQuery({
     queryKey: ['session'],
     queryFn: () => getApiUsersSession({}),
     retry: false,
@@ -47,7 +48,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
   }
 
   return (
-    <SessionContext.Provider value={{ isAuth, user, login, logout }}>
+    <SessionContext.Provider value={{ isAuth, user, isLoading, login, logout }}>
       {children}
     </SessionContext.Provider>
   )
