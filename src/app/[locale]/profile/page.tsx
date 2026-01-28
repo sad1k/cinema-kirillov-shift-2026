@@ -3,10 +3,11 @@
 import type { I18KeyType } from '@/shared/i18n'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { z } from 'zod'
+import { LogoutDialog } from '@/app/[locale]/profile/_components/logout-dialog'
 import { ProfileSkeleton } from '@/app/[locale]/profile/_components/profile-skeleton'
 import { getApiUsersSessionOptions, useGetApiUsersSessionSuspenseQuery, usePatchApiUsersProfileMutation } from '@/shared/api/generated'
 import { Button } from '@/shared/components/ui/button'
@@ -33,6 +34,7 @@ export default function ProfilePage() {
   const { data: userRaw, isLoading } = useGetApiUsersSessionSuspenseQuery()
   const { logout } = useSession()
   const router = useRouter()
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
 
   const isAuth = userRaw?.data.success
   const user = userRaw?.data.user
@@ -80,7 +82,11 @@ export default function ProfilePage() {
     })
   }
 
-  const onLogout = () => {
+  const onLogoutClick = () => {
+    setIsLogoutModalOpen(true)
+  }
+
+  const onLogoutConfirm = () => {
     logout()
     router.push('/')
   }
@@ -163,7 +169,7 @@ export default function ProfilePage() {
         </div>
 
         <div className="flex gap-4">
-          <Button variant="outline" type="button" onClick={onLogout}>
+          <Button variant="outline" type="button" onClick={onLogoutClick}>
             {tCommon('logout')}
           </Button>
           <Button type="submit" className="flex-1 bg-brand hover:bg-brand/90" disabled={isPending}>
@@ -171,6 +177,11 @@ export default function ProfilePage() {
           </Button>
         </div>
       </form>
+      <LogoutDialog
+        open={isLogoutModalOpen}
+        onOpenChange={setIsLogoutModalOpen}
+        onConfirm={onLogoutConfirm}
+      />
     </div>
   )
 }

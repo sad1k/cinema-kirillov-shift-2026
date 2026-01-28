@@ -6,6 +6,7 @@
     "phone": "Phone",
     "email": "Email",
     "city": "City",
-    "update_data": "Update data"
+    "update_data": "Update data",
+    "logout_confirmation": "Are you sure you want to log out?"
   }
 }

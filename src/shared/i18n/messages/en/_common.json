@@ -11,6 +11,8 @@
     "tickets": "Tickets",
     "logout": "Log out",
     "retry": "Send again",
-    "required": "Required field"
+    "required": "Required field",
+    "cancel": "Cancel",
+    "close": "Close"
   }
 }

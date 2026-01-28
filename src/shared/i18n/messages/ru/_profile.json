@@ -6,6 +6,7 @@
     "phone": "Телефон",
     "email": "Email",
     "city": "Город",
-    "update_data": "Обновить данные"
+    "update_data": "Обновить данные",
+    "logout_confirmation": "Вы точно хотите выйти?"
   }
 }
