@@ -1,0 +1,11 @@
+{
+  "profile": {
+    "lastname": "Last name",
+    "firstname": "First name",
+    "middlename": "Middle name",
+    "phone": "Phone",
+    "email": "Email",
+    "city": "City",
+    "update_data": "Update data"
+  }
+}

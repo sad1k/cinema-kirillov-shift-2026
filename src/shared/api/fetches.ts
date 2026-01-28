@@ -1,5 +1,5 @@
 import fetches from '@siberiacancode/fetches'
-import { getCookie } from 'cookies-next'
+import { deleteCookie, getCookie } from 'cookies-next'
 
 import { env } from '../config/env'
 
@@ -37,3 +37,20 @@ instance.interceptors.request.use((config) => {
 
   return config
 })
+
+instance.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      deleteCookie('token')
+      if (typeof window !== 'undefined') {
+        const locale = window.location.pathname.split('/')[1] || 'ru'
+        window.location.href = `/${locale}/auth/login`
+      }
+    }
+
+    return Promise.reject(error)
+  },
+)

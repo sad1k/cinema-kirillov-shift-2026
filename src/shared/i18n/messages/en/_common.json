@@ -10,6 +10,7 @@
     "profile": "Profile",
     "tickets": "Tickets",
     "logout": "Log out",
-    "retry": "Send again"
+    "retry": "Send again",
+    "required": "Required field"
   }
 }
