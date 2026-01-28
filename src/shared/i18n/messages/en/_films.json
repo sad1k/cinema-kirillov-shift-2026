@@ -1,14 +1,12 @@
 {
   "films": {
-    "about": "About film",
-    "sessions": "Sessions",
-    "reviews": "Reviews",
-    "actors": "Actors",
-    "directors": "Directors",
-    "runtime": "Runtime",
-    "minutes": "min",
-    "notFound": "Film not found",
-    "sessionsError": "Unable to load schedule",
-    "reviewsPlaceholder": "Reviews will be available soon"
+    "schedule": "Schedule",
+    "noSessions": "No sessions",
+    "noSessionsOnDate": "No sessions on this date",
+    "Red": "Red Hall",
+    "Blue": "Blue Hall",
+    "Purple": "Purple Hall",
+    "Green": "Green Hall",
+    "hallName": "{name}"
   }
 }

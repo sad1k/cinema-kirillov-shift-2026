@@ -2,9 +2,11 @@ import type { Metadata } from 'next'
 import type { I18nLocale } from '@/shared/i18n'
 import { getTranslations } from 'next-intl/server'
 
-import { getApiCinemaFilmByFilmId, getApiCinemaFilmByFilmIdSchedule } from '@/shared/api/generated'
+import { getApiCinemaFilmByFilmId } from '@/shared/api/generated'
 import { generateFilmMetadata } from '@/shared/seo/metadata'
+import { BackButton } from './_components/back-button'
 import { FilmHeader } from './_components/film-header'
+import { ScheduleSection } from './_components/schedule-section'
 
 interface FilmPageProps {
   params: Promise<{
@@ -55,9 +57,14 @@ export default async function FilmPage({ params }: FilmPageProps) {
 
   return (
     <>
-      <main className="container py-8 md:py-12">
-        <div className="mx-auto max-w-4xl">
+      <main className="container pb-8 md:pb-12">
+        <div>
+          <BackButton />
+        </div>
+
+        <div className="mx-auto space-y-12">
           <FilmHeader film={film} />
+          <ScheduleSection filmId={film.id} />
         </div>
       </main>
     </>
