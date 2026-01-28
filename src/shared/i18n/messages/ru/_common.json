@@ -2,7 +2,13 @@
   "common": {
     "login": "Войти",
     "details": "Подробнее",
+    "back": "Назад",
     "film": "Фильм",
-    "kinopoisk": "Kinopoisk"
+    "kinopoisk": "Kinopoisk",
+    "continue": "Продолжить",
+    "expand": "раскрыть",
+    "profile": "Профиль",
+    "tickets": "Билеты",
+    "logout": "Выйти"
   }
 }

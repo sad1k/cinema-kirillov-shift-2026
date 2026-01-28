@@ -5,6 +5,7 @@ export type I18nLocale = 'en' | 'ru'
 
 export type LangAll = typeof import('./messages/en/_common.json')
   & typeof import('./messages/en/_main.json')
+  & typeof import('./messages/en/_films.json')
 
 export type FlatLangAll = TranslationsStr<TranslationsTuple<LangAll>>
 export type Translations = FlatLangAll

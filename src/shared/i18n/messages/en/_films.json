@@ -1,0 +1,12 @@
+{
+  "films": {
+    "schedule": "Schedule",
+    "noSessions": "No sessions",
+    "noSessionsOnDate": "No sessions on this date",
+    "Red": "Red Hall",
+    "Blue": "Blue Hall",
+    "Purple": "Purple Hall",
+    "Green": "Green Hall",
+    "hallName": "{name}"
+  }
+}

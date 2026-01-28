@@ -13,6 +13,7 @@ export const getCachedDictionaries = cache(
     Promise.all([
       import(`../messages/${locale}/_common.json`),
       import(`../messages/${locale}/_main.json`),
+      import(`../messages/${locale}/_films.json`),
     ]).then((data: Array<{ default: { [key: string]: string } }>) => {
       return data.map(x => x.default)
     }),

@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   NEXT_PUBLIC_API_URL: z.url(),
+  NEXT_PUBLIC_SITE_URL: z.url().optional(),
 })
 
 export const env = envSchema.parse({

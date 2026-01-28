@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { Header } from '@/app/_components/header'
+
 import { routing } from '@/shared/i18n/i18n.routing'
 
 import { LayoutClient } from './layout-client'
@@ -27,7 +28,7 @@ export default async function LocaleLayout({
       <NextIntlClientProvider messages={messages}>
         <LayoutClient>
           <Header />
-          <main className="mx-auto max-w-[960px] px-4 py-6">
+          <main className="mx-auto max-w-[960px] px-4">
             {children}
           </main>
         </LayoutClient>

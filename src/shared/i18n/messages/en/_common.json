@@ -3,6 +3,12 @@
     "login": "Log in",
     "details": "Details",
     "film": "Movie",
-    "kinopoisk": "Kinopoisk"
+    "kinopoisk": "Kinopoisk",
+    "back": "Back",
+    "continue": "Continue",
+    "expand": "expand",
+    "profile": "Profile",
+    "tickets": "Tickets",
+    "logout": "Log out"
   }
 }
