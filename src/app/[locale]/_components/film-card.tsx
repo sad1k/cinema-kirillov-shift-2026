@@ -4,17 +4,10 @@ import Image from 'next/image'
 
 import { Button } from '@/shared/components/ui/button'
 import { Rating } from '@/shared/components/ui/rating'
+import { AGE_RATING_MAP } from '@/shared/constants/age-rating-map'
 import { useTypedI18n } from '@/shared/i18n/client/use-typed-i18n'
 import { Link } from '@/shared/i18n/i18n.routing'
 import { parseYear } from '@/shared/lib/utils'
-
-const AGE_RATING_MAP: Record<Film['ageRating'], string> = {
-  G: '0+',
-  PG: '6+',
-  PG13: '12+',
-  R: '16+',
-  NC17: '18+',
-}
 
 interface FilmCardProps {
   film: Film
