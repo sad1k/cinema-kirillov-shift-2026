@@ -336,6 +336,10 @@ export type FilmHall = {
     places: Array<Array<unknown>>;
 };
 
+export type FilmPlace = {
+
+}
+
 export type FilmScheduleSeance = {
     /**
      * Время сеанса
@@ -370,7 +374,7 @@ export type ScheduleResponse = {
     /**
      * Расписание
      */
-    schedules: FilmSchedule;
+    schedules: FilmSchedule[];
 };
 
 export type CreatePaymentPersonDto = {

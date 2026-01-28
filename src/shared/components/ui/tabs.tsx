@@ -29,7 +29,7 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      'text-content-05 text-paragraph-14 data-[state=active]:bg-background data-[state=active]:text-foreground relative flex h-10 w-[95px] shrink-0 items-center justify-center whitespace-nowrap rounded-[12px] px-4 py-2.5 font-normal transition-all outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-md [&:not(:last-child):not([data-state=active])]:after:absolute [&:not(:last-child):not([data-state=active])]:after:right-0 [&:not(:last-child):not([data-state=active])]:after:h-5 [&:not(:last-child):not([data-state=active])]:after:w-[1px] [&:not(:last-child):not([data-state=active])]:after:bg-gray-300 [&:not(:last-child):not([data-state=active])]:after:content-[""]',
+      'text-content-05 text-paragraph-14 data-[state=active]:bg-background data-[state=active]:text-foreground relative flex h-10 w-[95px] shrink-0 items-center justify-center whitespace-nowrap rounded-[12px] px-4 py-2.5 font-normal transition-all outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-md [&:not(:last-child):not([data-state=active])]:after:absolute [&:not(:last-child):not([data-state=active])]:after:right-0 [&:not(:last-child):not([data-state=active])]:after:h-5 [&:not(:last-child):not([data-state=active])]:after:w-[1px] [&:not(:last-child):not([data-state=active])]:after:bg-gray-300 [&:not(:last-child):not([data-state=active])]:after:content-[""] cursor-pointer',
       className,
     )}
     {...props}

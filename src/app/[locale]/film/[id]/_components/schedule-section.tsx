@@ -2,13 +2,15 @@
 
 import type { FilmSchedule, FilmScheduleSeance } from '@/shared/api/generated'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useGetApiCinemaFilmByFilmIdScheduleQuery } from '@/shared/api/generated/hooks/cinema/useGetApiCinemaFilmByFilmIdScheduleQuery.gen'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/components/ui/toggle-group'
 import { useTypedI18n } from '@/shared/i18n/client'
+import { useRouter } from '@/shared/i18n/i18n.routing'
+import { useSession } from '@/shared/session/session-provider'
 
 interface ScheduleSectionProps {
   filmId: string
@@ -45,8 +47,16 @@ const HALL_ORDER = ['Красный зал', 'Синий зал', 'Фиолет�
 export function ScheduleSection({ filmId }: ScheduleSectionProps) {
   const { t: tFilms } = useTypedI18n('films')
   const { t: tCommon } = useTypedI18n('common')
+  const { isAuth } = useSession()
+  const router = useRouter()
   const [selectedSeance, setSelectedSeance] = useState<string | null>(null)
   const [selectedDate, setSelectedDate] = useState<string | undefined>(undefined)
+
+  const handleContinue = () => {
+    if (!isAuth) {
+      router.push('/auth/login')
+    }
+  }
 
   const { data: scheduleResponse } = useGetApiCinemaFilmByFilmIdScheduleQuery({
     request: {
@@ -56,12 +66,6 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
 
   const schedules = scheduleResponse?.data?.schedules
   const hasSchedules = !!schedules?.length
-
-  useEffect(() => {
-    if (hasSchedules && !selectedDate && schedules[0]?.date) {
-      setSelectedDate(schedules[0].date)
-    }
-  }, [hasSchedules, selectedDate, schedules])
 
   const activeDate = selectedDate || (hasSchedules ? schedules[0]?.date : undefined)
   const activeSchedule = schedules?.find(s => s.date === activeDate) || (hasSchedules ? schedules[0] : null)
@@ -101,6 +105,7 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
         value={activeDate}
         onValueChange={setSelectedDate}
         className="w-full"
+        defaultValue={schedules[0]?.date}
       >
         <TabsList className="mb-6 flex-wrap h-auto">
           {schedules.map(scheduleItem => (
@@ -152,7 +157,12 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
         )}
       </div>
 
-      <Button size="lg" className="w-full md:w-[300px]" disabled={!selectedSeance}>
+      <Button
+        size="lg"
+        className="w-full md:w-[300px]"
+        disabled={!selectedSeance}
+        onClick={handleContinue}
+      >
         {tCommon('continue')}
       </Button>
     </div>
