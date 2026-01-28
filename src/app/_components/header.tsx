@@ -6,7 +6,8 @@ import { ThemeToggle } from '@/shared/components/theme-toggle'
 import { Button } from '@/shared/components/ui/button'
 import { Skeleton } from '@/shared/components/ui/skeleton'
 import { useTypedI18n } from '@/shared/i18n/client/use-typed-i18n'
-import { Link } from '@/shared/i18n/i18n.routing'
+import { Link, usePathname } from '@/shared/i18n/i18n.routing'
+import { cn } from '@/shared/lib/utils'
 import { useSession } from '@/shared/session/session-provider'
 
 import { LogoCinema } from './icons/logo-cinema'
@@ -14,6 +15,7 @@ import { LogoCinema } from './icons/logo-cinema'
 export function Header() {
   const { t } = useTypedI18n('common')
   const { isAuth, logout, isLoading } = useSession()
+  const pathname = usePathname()
 
   return (
     <header className="w-full border-b border-border py-4">
@@ -33,7 +35,11 @@ export function Header() {
             : isAuth
               ? (
                   <>
-                    <Button variant="ghost" asChild>
+                    <Button
+                      variant="ghost"
+                      asChild
+                      className={cn(pathname === '/profile' && 'text-brand')}
+                    >
                       <Link href="/profile">
                         <User className="size-5" />
                         {t('profile')}
