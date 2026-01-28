@@ -1,0 +1,20 @@
+{
+  "tickets": {
+    "title": "Tickets",
+    "active": "Active",
+    "history": "History",
+    "refund_ticket": "Refund ticket",
+    "return_ticket_q": "Refund ticket?",
+    "refund": "Refund",
+    "cancel": "Cancel",
+    "paid": "Paid",
+    "cancelled": "Cancelled",
+    "ticket_number": "Ticket number",
+    "ticket_code": "Ticket code",
+    "row": "Row",
+    "seat": "Seat",
+    "seats": "Seats",
+    "no_active_tickets": "No active tickets",
+    "no_history_tickets": "No ticket history"
+  }
+}

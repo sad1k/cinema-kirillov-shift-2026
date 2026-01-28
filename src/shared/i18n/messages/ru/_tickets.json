@@ -1,0 +1,20 @@
+{
+  "tickets": {
+    "title": "Заказы",
+    "active": "Активные",
+    "history": "История",
+    "refund_ticket": "Вернуть билет",
+    "return_ticket_q": "Вернуть билет?",
+    "refund": "Вернуть",
+    "cancel": "Отменить",
+    "paid": "Оплачен",
+    "cancelled": "Отменен",
+    "ticket_number": "Номер билета",
+    "ticket_code": "Код билета",
+    "row": "ряд",
+    "seat": "место",
+    "seats": "места",
+    "no_active_tickets": "Нет активных заказов",
+    "no_history_tickets": "История заказов пуста"
+  }
+}
