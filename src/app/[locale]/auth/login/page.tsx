@@ -20,6 +20,7 @@ const otpSchema = z.object({
 
 export default function LoginPage() {
   const { t } = useTypedI18n('common')
+  const { t: tAuth } = useTypedI18n('auth')
   const router = useRouter()
   const { login } = useSession()
   const [otpSent, setOtpSent] = useState(false)
@@ -90,10 +91,10 @@ export default function LoginPage() {
   return (
     <div className="mx-auto mt-20 max-w-[400px]">
       <div className="mb-8">
-        <h1 className="mb-2 text-heading-2 font-bold">{t('login')}</h1>
+        <h1 className="mb-2 text-heading-2 font-bold">{tAuth('authorization')}</h1>
         {otpSent && (
           <p className="text-paragraph-14 text-muted-foreground">
-            Введите проверочный код для входа в личный кабинет
+            {tAuth('auth_tooltip')}
           </p>
         )}
       </div>
@@ -125,7 +126,7 @@ export default function LoginPage() {
 
         {(otpError || signInError) && (
           <p className="text-sm text-destructive">
-            Произошла ошибка
+            {t('error')}
           </p>
         )}
 

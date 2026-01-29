@@ -1,20 +1,22 @@
 import type { Film } from '@/shared/api/generated'
 
-import Image from 'next/image'
+import type { I18nLocale } from '@/shared/i18n/server'
 
+import Image from 'next/image'
 import { Button } from '@/shared/components/ui/button'
 import { Rating } from '@/shared/components/ui/rating'
 import { AGE_RATING_MAP } from '@/shared/constants/age-rating-map'
-import { useTypedI18n } from '@/shared/i18n/client/use-typed-i18n'
 import { Link } from '@/shared/i18n/i18n.routing'
+import { getTypedServerI18n } from '@/shared/i18n/server'
 import { parseYear } from '@/shared/lib/utils'
 
 interface FilmCardProps {
   film: Film
+  locale: I18nLocale
 }
 
-export function FilmCard({ film }: FilmCardProps) {
-  const { t } = useTypedI18n('common')
+export async function FilmCard({ film, locale }: FilmCardProps) {
+  const { t } = await getTypedServerI18n(locale, 'common')
   const releaseYear = parseYear(film.releaseDate)
   const ageRating = AGE_RATING_MAP[film.ageRating]
   const kinopoiskRating = Number.parseFloat(film.userRatings.kinopoisk)

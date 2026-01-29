@@ -1,6 +1,6 @@
 'use client'
 
-import type { FilmSchedule, FilmScheduleSeance } from '@/shared/api/generated'
+import type { FilmScheduleSeance } from '@/shared/api/generated'
 
 import { useState } from 'react'
 
@@ -41,8 +41,6 @@ function groupSeancesByHall(seances: FilmScheduleSeance[]) {
 
   return grouped
 }
-
-const HALL_ORDER = ['Красный зал', 'Синий зал', 'Фиолетовый зал']
 
 export function ScheduleSection({ filmId }: ScheduleSectionProps) {
   const { t: tFilms } = useTypedI18n('films')
@@ -87,13 +85,9 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
     return null
   }
 
-  const currentSchedule = activeSchedule as unknown as FilmSchedule
+  const currentSchedule = activeSchedule
   const groupedSeances = currentSchedule.seances ? groupSeancesByHall(currentSchedule.seances) : {}
-  const sortedHallNames = Object.keys(groupedSeances).sort((a, b) => {
-    const indexA = HALL_ORDER.indexOf(a)
-    const indexB = HALL_ORDER.indexOf(b)
-    return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB)
-  })
+  const hallNames = Object.keys(groupedSeances)
 
   return (
     <div className="flex flex-col gap-6">
@@ -120,7 +114,7 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
       </Tabs>
 
       <div className="flex flex-col gap-6">
-        {sortedHallNames.map(hallName => (
+        {hallNames.map(hallName => (
           <div key={hallName} className="flex flex-col gap-4">
             <span className="text-paragraph-14 text-muted-foreground ml-1">
               {tFilms(hallName as 'Red' | 'Blue' | 'Purple')}
@@ -150,7 +144,7 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
           </div>
         ))}
 
-        {sortedHallNames.length === 0 && (
+        {hallNames.length === 0 && (
           <p className="text-paragraph-14 text-muted-foreground">
             {tFilms('noSessionsOnDate')}
           </p>
