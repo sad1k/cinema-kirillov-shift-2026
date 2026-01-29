@@ -8,6 +8,7 @@ export type LangAll = typeof import('./messages/en/_common.json')
   & typeof import('./messages/en/_films.json')
   & typeof import('./messages/en/_profile.json')
   & typeof import('./messages/en/_tickets.json')
+  & typeof import('./messages/en/_auth.json')
 
 export type FlatLangAll = TranslationsStr<TranslationsTuple<LangAll>>
 export type Translations = FlatLangAll

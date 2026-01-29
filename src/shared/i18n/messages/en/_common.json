@@ -13,6 +13,7 @@
     "retry": "Send again",
     "required": "Required field",
     "cancel": "Cancel",
-    "close": "Close"
+    "close": "Close",
+    "error": "An error occurred"
   }
 }

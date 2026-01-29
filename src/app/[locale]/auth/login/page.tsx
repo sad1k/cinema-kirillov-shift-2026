@@ -1,10 +1,11 @@
 'use client'
 
 import type { ResponseError } from '@siberiacancode/fetches'
+import type { I18KeyType } from '@/shared/i18n'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { usePostApiAuthOtpMutation, usePostApiUsersSigninMutation } from '@/shared/api/generated'
 import { Button } from '@/shared/components/ui/button'
@@ -13,16 +14,19 @@ import { useTypedI18n } from '@/shared/i18n/client/use-typed-i18n'
 import { useRouter } from '@/shared/i18n/i18n.routing'
 import { useSession } from '@/shared/session/session-provider'
 
-const otpSchema = z.object({
+const createOtpSchema = (tAuth: (key: I18KeyType<'auth'>) => string) => z.object({
   phone: z.string(),
-  code: z.coerce.number({ message: 'Code must be a number' }).optional(),
+  code: z.coerce.number({ message: tAuth('code_error') }).optional(),
 })
 
 export default function LoginPage() {
   const { t } = useTypedI18n('common')
+  const { t: tAuth } = useTypedI18n('auth')
   const router = useRouter()
   const { login } = useSession()
   const [otpSent, setOtpSent] = useState(false)
+
+  const otpSchema = createOtpSchema(tAuth)
 
   const {
     register,
@@ -90,10 +94,10 @@ export default function LoginPage() {
   return (
     <div className="mx-auto mt-20 max-w-[400px]">
       <div className="mb-8">
-        <h1 className="mb-2 text-heading-2 font-bold">{t('login')}</h1>
+        <h1 className="mb-2 text-heading-2 font-bold">{tAuth('authorization')}</h1>
         {otpSent && (
           <p className="text-paragraph-14 text-muted-foreground">
-            Введите проверочный код для входа в личный кабинет
+            {tAuth('auth_tooltip')}
           </p>
         )}
       </div>
@@ -125,7 +129,7 @@ export default function LoginPage() {
 
         {(otpError || signInError) && (
           <p className="text-sm text-destructive">
-            Произошла ошибка
+            {t('error')}
           </p>
         )}
 

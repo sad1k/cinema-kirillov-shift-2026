@@ -28,7 +28,11 @@ export function TicketCard({ order, variant }: TicketCardProps) {
         setIsRefundOpen(false)
       },
       onError: () => {
+<<<<<<< HEAD
 
+=======
+        setIsRefundOpen(false)
+>>>>>>> dc478a81f942ca52555d4dc1bd37be3722fc3909
       },
     },
   })
@@ -74,12 +78,20 @@ export function TicketCard({ order, variant }: TicketCardProps) {
             <div>
               {variant === 'active'
                 ? (
+<<<<<<< HEAD
                     <Badge variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-100 hover:text-green-700 dark:bg-green-900/30 dark:text-green-400">
+=======
+                    <Badge variant="success">
+>>>>>>> dc478a81f942ca52555d4dc1bd37be3722fc3909
                       {t('paid')}
                     </Badge>
                   )
                 : (
+<<<<<<< HEAD
                     <Badge variant="destructive" className="bg-red-100 text-red-700 hover:bg-red-100 hover:text-red-700 dark:bg-red-900/30 dark:text-red-400">
+=======
+                    <Badge variant={isCancelled ? 'error' : 'success'}>
+>>>>>>> dc478a81f942ca52555d4dc1bd37be3722fc3909
                       {isCancelled ? t('cancelled') : t('paid')}
                     </Badge>
                   )}
