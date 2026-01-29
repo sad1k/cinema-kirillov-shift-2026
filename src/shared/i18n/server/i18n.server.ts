@@ -16,6 +16,7 @@ export const getCachedDictionaries = cache(
       import(`../messages/${locale}/_films.json`),
       import(`../messages/${locale}/_profile.json`),
       import(`../messages/${locale}/_tickets.json`),
+      import(`../messages/${locale}/_auth.json`),
     ]).then((data: Array<{ default: { [key: string]: string } }>) => {
       return data.map(x => x.default)
     }),

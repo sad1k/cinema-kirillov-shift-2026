@@ -24,7 +24,7 @@ export default async function HomePage({ params }: HomePageProps) {
     )
   }
 
-  return <FilmGrid films={response.data.films} />
+  return <FilmGrid films={response.data.films} locale={locale} />
 }
 
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {

@@ -8,6 +8,7 @@ import { Badge } from '@/shared/components/ui/badge'
 import { Button } from '@/shared/components/ui/button'
 import { FilmPoster } from '@/shared/components/ui/film-poster'
 import { Rating } from '@/shared/components/ui/rating'
+import { env } from '@/shared/config/env'
 import { AGE_RATING_MAP } from '@/shared/constants/age-rating-map'
 import { useTypedI18n } from '@/shared/i18n/client'
 import { cn, parseYear } from '@/shared/lib/utils'
@@ -30,7 +31,7 @@ export function FilmHeader({ film }: FilmHeaderProps) {
       <div className="mx-auto w-full max-w-[300px] md:mx-0">
         <div className="relative h-[300px] w-[300px]">
           <FilmPoster
-            src={`https://shift-intensive.ru/api${film.img}`}
+            src={`${env.NEXT_PUBLIC_API_URL}/api${film.img}`}
             alt={film.name}
             genre={film.genres[0]}
             country={film.country?.name}
