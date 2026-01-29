@@ -1,10 +1,11 @@
 'use client'
 
 import type { ResponseError } from '@siberiacancode/fetches'
+import type { I18KeyType } from '@/shared/i18n'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { usePostApiAuthOtpMutation, usePostApiUsersSigninMutation } from '@/shared/api/generated'
 import { Button } from '@/shared/components/ui/button'
@@ -13,9 +14,9 @@ import { useTypedI18n } from '@/shared/i18n/client/use-typed-i18n'
 import { useRouter } from '@/shared/i18n/i18n.routing'
 import { useSession } from '@/shared/session/session-provider'
 
-const otpSchema = z.object({
+const createOtpSchema = (tAuth: (key: I18KeyType<'auth'>) => string) => z.object({
   phone: z.string(),
-  code: z.coerce.number({ message: 'Code must be a number' }).optional(),
+  code: z.coerce.number({ message: tAuth('code_error') }).optional(),
 })
 
 export default function LoginPage() {
@@ -24,6 +25,8 @@ export default function LoginPage() {
   const router = useRouter()
   const { login } = useSession()
   const [otpSent, setOtpSent] = useState(false)
+
+  const otpSchema = createOtpSchema(tAuth)
 
   const {
     register,
