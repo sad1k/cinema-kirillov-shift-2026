@@ -52,12 +52,6 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
   const [selectedSeance, setSelectedSeance] = useState<string | null>(null)
   const [selectedDate, setSelectedDate] = useState<string | undefined>(undefined)
 
-  const handleContinue = () => {
-    if (!isAuth) {
-      router.push('/auth/login')
-    }
-  }
-
   const { data: scheduleResponse } = useGetApiCinemaFilmByFilmIdScheduleQuery({
     request: {
       path: { filmId },
@@ -94,6 +88,25 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
     const indexB = HALL_ORDER.indexOf(b)
     return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB)
   })
+
+  const handleContinue = () => {
+    if (!isAuth) {
+      router.push('/auth/login')
+      return
+    }
+
+    if (selectedSeance && selectedDate) {
+      const [time, hall] = selectedSeance.split('-')
+      router.push({
+        pathname: `/film/${filmId}/booking`,
+        query: {
+          date: selectedDate,
+          time,
+          hall,
+        },
+      })
+    }
+  }
 
   return (
     <div className="flex flex-col gap-6">

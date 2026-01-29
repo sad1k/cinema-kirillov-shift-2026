@@ -333,11 +333,12 @@ export type FilmHall = {
     /**
      * Места в зале
      */
-    places: Array<Array<unknown>>;
+    places: Array<Array<FilmPlace>>;
 };
 
 export type FilmPlace = {
-
+    type: string
+    price: number
 }
 
 export type FilmScheduleSeance = {
