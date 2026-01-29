@@ -5,6 +5,7 @@ import type { I18nLocale } from '@/shared/i18n/server'
 import Image from 'next/image'
 import { Button } from '@/shared/components/ui/button'
 import { Rating } from '@/shared/components/ui/rating'
+import { env } from '@/shared/config/env'
 import { AGE_RATING_MAP } from '@/shared/constants/age-rating-map'
 import { Link } from '@/shared/i18n/i18n.routing'
 import { getTypedServerI18n } from '@/shared/i18n/server'
@@ -26,7 +27,7 @@ export async function FilmCard({ film, locale }: FilmCardProps) {
     <article className="flex h-full flex-col gap-3">
       <div className="relative overflow-hidden rounded-2xl rounded-br-xs">
         <Image
-          src={`https://shift-intensive.ru/api${film.img}`}
+          src={`${env.NEXT_PUBLIC_API_URL}/api${film.img}`}
           alt={film.name}
           width={300}
           height={300}
