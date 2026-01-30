@@ -2,11 +2,19 @@
   "main": {
     "home": {
       "title": "Schedule",
+      "about": "About movie",
+      "successTitle": "Success",
       "error": "Failed to load films",
       "meta": {
         "title": "SHIFT CINEMA - Schedule",
         "description": "Watch the best movies at SHIFT CINEMA"
       }
+    },
+    "booking": {
+      "title": "Booking"
+    },
+    "success": {
+      "title": "Success"
     }
   }
 }

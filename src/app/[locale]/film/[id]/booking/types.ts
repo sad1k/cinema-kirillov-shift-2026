@@ -3,9 +3,8 @@ import { z } from 'zod'
 export interface Seat {
   row: number
   column: number
-  type: 'BLOCKED' | 'ECONOM' | 'VIP' | 'COMFORT'
+  type: string
   price: number
-  isAvailable: boolean
 }
 
 export interface BookingState {
@@ -20,18 +19,18 @@ export interface BookingState {
 }
 
 export const userDetailsSchema = z.object({
-  firstname: z.string().min(1, 'Введите имя'),
-  lastname: z.string().min(1, 'Введите фамилию'),
+  firstname: z.string().min(1, 'enter_name'),
+  lastname: z.string().min(1, 'enter_surname'),
   middlename: z.string().optional(),
-  phone: z.string().min(10, 'Введите корректный номер телефона'),
+  phone: z.string().min(10, 'enter_phone'),
 })
 
 export type UserDetails = z.infer<typeof userDetailsSchema>
 
 export const paymentSchema = z.object({
-  pan: z.string().min(16, 'Некорректный номер карты'),
-  expireDate: z.string().regex(/^\d{2}\/\d{2}$/, 'Формат MM/YY'),
-  cvv: z.string().regex(/^\d{3,4}$/, '3 или 4 цифры'),
+  pan: z.string().min(16, 'card_number_error'),
+  expireDate: z.string().regex(/^\d{2}\/\d{2}$/, 'card_expire_error'),
+  cvv: z.string().regex(/^\d{3,4}$/, 'card_cvv_error'),
 })
 
 export type PaymentDetails = z.infer<typeof paymentSchema>

@@ -2,10 +2,9 @@
 
 import type { PropsWithChildren } from 'react'
 import type { User } from '@/shared/api/generated'
-import { useQuery } from '@tanstack/react-query'
-import { deleteCookie, getCookie, setCookie } from 'cookies-next'
+import { deleteCookie, setCookie } from 'cookies-next'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { getApiUsersSession, useGetApiUsersSessionQuery } from '@/shared/api/generated'
+import { useGetApiUsersSessionQuery } from '@/shared/api/generated'
 
 interface SessionContextValue {
   isAuth: boolean
@@ -17,18 +16,20 @@ interface SessionContextValue {
 
 const SessionContext = createContext<SessionContextValue | null>(null)
 
-export function SessionProvider({ children }: PropsWithChildren) {
+export function SessionProvider({ children, hasToken = false }: PropsWithChildren<{ hasToken?: boolean }>) {
   const [user, setUser] = useState<User | null>(null)
   const [isAuth, setIsAuth] = useState(false)
+  const [isEnabled, setIsEnabled] = useState(hasToken)
 
-  const token = getCookie('token')
   const { data, isSuccess, isLoading } = useGetApiUsersSessionQuery({
     params: {
       staleTime: 5 * 60 * 1000,
       retry: false,
-      enabled: !!token,
+      enabled: isEnabled,
     },
   })
+
+  console.log(data, 'data')
 
   useEffect(() => {
     if (isSuccess && data?.data.success && data.data.user) {
@@ -41,6 +42,7 @@ export function SessionProvider({ children }: PropsWithChildren) {
     setCookie('token', token)
     setUser(newUser)
     setIsAuth(true)
+    setIsEnabled(true)
   }
 
   const logout = () => {

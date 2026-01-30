@@ -1,4 +1,4 @@
-import type { User } from '../api/generated'
+import type { User } from '../../api/generated'
 
 export interface SessionContextValue {
   isAuth: boolean

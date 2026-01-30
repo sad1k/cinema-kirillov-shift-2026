@@ -1,10 +1,15 @@
+'use client'
 import type { PaymentDetails, Seat, UserDetails } from '../types'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
+import { HeaderController } from '@/app/_components/header-controller'
 import { usePostApiCinemaPaymentMutation } from '@/shared/api/generated'
+import { Progress } from '@/shared/components/ui/progress'
+import { useTypedI18n } from '@/shared/i18n/client'
 import { useRouter } from '@/shared/i18n/i18n.routing'
-import { cn } from '@/shared/lib/utils'
 import { BookingStepOne } from './steps/booking-step-one'
+import { BookingStepSkeleton } from './steps/booking-step-skeleton'
 import { BookingStepThree } from './steps/booking-step-three'
+
 import { BookingStepTwo } from './steps/booking-step-two'
 
 interface BookingStepsContainerProps {
@@ -15,6 +20,7 @@ interface BookingStepsContainerProps {
 }
 
 export function BookingStepsContainer({ filmId, date, time, hall }: BookingStepsContainerProps) {
+  const { t } = useTypedI18n('booking')
   const router = useRouter()
 
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1)
@@ -38,8 +44,9 @@ export function BookingStepsContainer({ filmId, date, time, hall }: BookingSteps
   }
 
   const handlePayment = (paymentData: PaymentDetails) => {
-    if (!userDetails || selectedSeats.length === 0) { return }
-
+    if (!userDetails || selectedSeats.length === 0) {
+      return
+    }
     pay({
       body: {
         filmId,
@@ -64,51 +71,58 @@ export function BookingStepsContainer({ filmId, date, time, hall }: BookingSteps
         })),
       },
     }, {
-      onSuccess: () => {
-        router.push('/profile/tickets')
-      },
-      onError: () => {
-        // alert('Ошибка при оплате')
+      onSuccess: (data) => {
+        router.push(`/film/${filmId}/booking/success?orderId=${data.data.order._id}`)
       },
     })
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 w-full md:w-fit">
+      {currentStep === 1 && (
+        <HeaderController title={t('step1Title')} leftAction="back" onLeftClick={handleBack} />
+      )}
+      {currentStep === 2 && (
+        <HeaderController title={t('step2Title')} leftAction="back" onLeftClick={handleBack} />
+      )}
+      {currentStep === 3 && (
+        <HeaderController title={t('step3Title')} leftAction="back" onLeftClick={handleBack} />
+      )}
       <div className="flex flex-col gap-2">
-        <h1 className="text-title-h2">Выбор места</h1>
+        <h1 className="text-title-h2">{t('step1Title')}</h1>
         <div className="flex items-center gap-2">
-          <div className={cn('h-1 flex-1 rounded-full', currentStep >= 1 ? 'bg-primary' : 'bg-muted')} />
-          <div className={cn('h-1 flex-1 rounded-full', currentStep >= 2 ? 'bg-primary' : 'bg-muted')} />
-          <div className={cn('h-1 flex-1 rounded-full', currentStep >= 3 ? 'bg-primary' : 'bg-muted')} />
+          <Progress value={currentStep * 100 / 3} />
         </div>
         <p className="text-paragraph-14 text-muted-foreground">
-          Шаг
+          {t('step')}
           {' '}
           {currentStep}
           {' '}
-          из 3
+          {t('of')}
+          {' '}
+          3
         </p>
       </div>
 
       <div className="min-h-[400px]">
         {currentStep === 1 && (
-          <BookingStepOne
-            filmId={filmId}
-            date={date}
-            time={time}
-            hall={hall}
-            selectedSeats={selectedSeats}
-            onChange={setSelectedSeats}
-            handleNext={() => setCurrentStep(2)}
-            handleBack={handleBack}
-          />
+          <Suspense fallback={<BookingStepSkeleton />}>
+            <BookingStepOne
+              filmId={filmId}
+              date={date}
+              time={time}
+              hall={hall}
+              selectedSeats={selectedSeats}
+              onChange={setSelectedSeats}
+              handleNext={() => setCurrentStep(2)}
+              handleBack={handleBack}
+            />
+          </Suspense>
         )}
 
         {currentStep === 2 && (
           <BookingStepTwo
             onSubmit={handleStepTwoSubmit}
-            handleNext={() => setCurrentStep(3)}
             handleBack={handleBack}
           />
         )}

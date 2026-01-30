@@ -11,11 +11,16 @@ export const instance = fetches.create({
   },
 })
 
-instance.interceptors.request.use((config) => {
+instance.interceptors.request.use(async (config) => {
   const token = getCookie('token')
   if (token) {
+    // const cookieStore = await import('next/headers').then(mod => mod.cookies())
     config.headers = config.headers ?? {}
     config.headers.Authorization = `Bearer ${token}`
+    // config.headers.cookie = cookieStore
+    //   .getAll()
+    //   .map(cookie => `${encodeURIComponent(cookie.name)}=${encodeURIComponent(cookie.value)}`)
+    //   .join('; ')
   }
 
   if (config.headers) {

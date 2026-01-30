@@ -2,26 +2,27 @@
 
 import type { FilmScheduleSeance } from '@/shared/api/generated'
 
-import { useState } from 'react'
+import { useLocale } from 'next-intl'
 
-import { useGetApiCinemaFilmByFilmIdScheduleQuery } from '@/shared/api/generated/hooks/cinema/useGetApiCinemaFilmByFilmIdScheduleQuery.gen'
+import { useState } from 'react'
+import { useGetApiCinemaFilmByFilmIdScheduleSuspenseQuery } from '@/shared/api/generated/hooks/cinema/useGetApiCinemaFilmByFilmIdScheduleSuspenseQuery.gen'
 import { Button } from '@/shared/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/components/ui/toggle-group'
 import { useTypedI18n } from '@/shared/i18n/client'
 import { useRouter } from '@/shared/i18n/i18n.routing'
-import { useSession } from '@/shared/session/session-provider'
+import { useSession } from '@/shared/providers/session/session-provider'
 
 interface ScheduleSectionProps {
   filmId: string
 }
 
-function formatDate(dateString: string): string {
+function formatDate(dateString: string, locale: string): string {
   const [day, month, year] = dateString.split('.')
   const fullYear = year.length === 2 ? `20${year}` : year
   const date = new Date(`${fullYear}-${month}-${day}`)
 
-  return new Intl.DateTimeFormat('ru-RU', {
+  return new Intl.DateTimeFormat(locale, {
     weekday: 'short',
     day: 'numeric',
     month: 'short',
@@ -47,10 +48,11 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
   const { t: tCommon } = useTypedI18n('common')
   const { isAuth } = useSession()
   const router = useRouter()
+  const locale = useLocale()
   const [selectedSeance, setSelectedSeance] = useState<string | null>(null)
-  const [selectedDate, setSelectedDate] = useState<string | undefined>(undefined)
+  const [selectedDate, setSelectedDate] = useState<string>()
 
-  const { data: scheduleResponse } = useGetApiCinemaFilmByFilmIdScheduleQuery({
+  const { data: scheduleResponse } = useGetApiCinemaFilmByFilmIdScheduleSuspenseQuery({
     request: {
       path: { filmId },
     },
@@ -88,13 +90,12 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
       router.push('/auth/login')
       return
     }
-
-    if (selectedSeance && selectedDate) {
+    if (selectedSeance && (selectedDate || activeDate)) {
       const [time, hall] = selectedSeance.split('-')
       router.push({
         pathname: `/film/${filmId}/booking`,
         query: {
-          date: selectedDate,
+          date: selectedDate ?? activeDate,
           time,
           hall,
         },
@@ -103,7 +104,7 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 mt-5">
       <h2 className="text-title-h3">
         {tFilms('schedule')}
       </h2>
@@ -114,13 +115,13 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
         className="w-full"
         defaultValue={schedules[0]?.date}
       >
-        <TabsList className="mb-6 flex-wrap h-auto">
+        <TabsList className="mb-6 h-auto  w-[calc(100%+32px)] px-4 flex-nowrap md:mx-0 md:w-fit md:px-[2px] md:flex-wrap">
           {schedules.map(scheduleItem => (
             <TabsTrigger
               key={scheduleItem.date}
               value={scheduleItem.date}
             >
-              {formatDate(scheduleItem.date)}
+              {formatDate(scheduleItem.date, locale)}
             </TabsTrigger>
           ))}
         </TabsList>
@@ -138,6 +139,7 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
               variant="outline"
               spacing={2}
               value={selectedSeance || ''}
+              className="flex-wrap"
               onValueChange={(val) => {
                 if (val) {
                   setSelectedSeance(val)
@@ -165,7 +167,6 @@ export function ScheduleSection({ filmId }: ScheduleSectionProps) {
       </div>
 
       <Button
-        size="lg"
         className="w-full md:w-[300px]"
         disabled={!selectedSeance}
         onClick={handleContinue}

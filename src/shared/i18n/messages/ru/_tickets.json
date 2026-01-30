@@ -15,6 +15,26 @@
     "seat": "место",
     "seats": "места",
     "no_active_tickets": "Нет активных заказов",
-    "no_history_tickets": "История заказов пуста"
+    "no_history_tickets": "История заказов пуста",
+    "errors": {
+      "cant_refund": "Нельзя вернуть",
+      "enter_name": "Введите имя",
+      "enter_surname": "Введите фамилию",
+      "enter_phone": "Введите номер телефона",
+      "card_number_error": "Неверный номер карты",
+      "card_expire_error": "Неверная дата окончания карты",
+      "card_cvv_error": "Неверный CVV"
+    },
+    "success": {
+      "title": "Оплата прошла успешно!",
+      "ticket_number": "Номер билета",
+      "film": "Фильм",
+      "date_and_time": "Дата и время",
+      "row": "Ряд",
+      "seat": "Место",
+      "info_duplicated": "Вся информация была продублирована в SMS",
+      "order_details": "Детали заказа",
+      "to_main": "На главную"
+    }
   }
 }

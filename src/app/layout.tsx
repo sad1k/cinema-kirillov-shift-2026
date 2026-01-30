@@ -1,20 +1,16 @@
-import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
+
+import { ErrorBoundary } from 'next/dist/client/components/error-boundary'
+
 import { Inter } from 'next/font/google'
-
-import { ThemeProvider } from '@/shared/components/theme-provider'
-
+import { ThemeProvider } from '@/shared/providers/theme/theme-provider'
+import Error from './error'
 import './globals.css'
 
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin', 'cyrillic'],
 })
-
-export const metadata: Metadata = {
-  title: 'Cinema',
-  description: 'Book movie tickets online',
-}
 
 export default function RootLayout({
   children,
@@ -26,7 +22,9 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans`}>
         <ThemeProvider>
           <NextIntlClientProvider>
-            {children}
+            <ErrorBoundary errorComponent={Error}>
+              {children}
+            </ErrorBoundary>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

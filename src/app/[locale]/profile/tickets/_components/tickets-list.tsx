@@ -19,7 +19,9 @@ export function TicketsList({ orders }: TicketsListProps) {
     const seanceDateStr = order.tickets[0]?.seance.date
     const seanceTimeStr = order.tickets[0]?.seance.time
 
-    if (!seanceDateStr || !seanceTimeStr) { return false }
+    if (!seanceDateStr || !seanceTimeStr) {
+      return false
+    }
 
     const isPayed = order.status === 'PAYED'
     const isCanceled = order.status === 'CANCELED' || order.tickets.some(t => t.status === 'CANCELED')

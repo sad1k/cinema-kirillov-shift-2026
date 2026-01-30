@@ -2,11 +2,19 @@
   "main": {
     "home": {
       "title": "Афиша",
+      "about": "О фильме",
+      "successTitle": "Успешно",
       "error": "Не удалось загрузить фильмы",
       "meta": {
         "title": "ШИФТ CINEMA - Афиша",
         "description": "Смотрите лучшие фильмы в кинотеатре ШИФТ CINEMA"
       }
+    },
+    "booking": {
+      "title": "Бронирование"
+    },
+    "success": {
+      "title": "Успешно"
     }
   }
 }

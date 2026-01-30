@@ -3,6 +3,12 @@
 import type { Seat } from '../../types'
 import { useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
+import {
+  DrawerSelect,
+  DrawerSelectContent,
+  DrawerSelectItem,
+  DrawerSelectTrigger as DrawerSelectTriggerComp,
+} from '@/shared/components/ui/drawer-select'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select'
 import { useTypedI18n } from '@/shared/i18n/client'
 
@@ -12,20 +18,17 @@ interface SeatSelectFormProps {
 }
 
 export function SeatSelectForm({ seats, onAddSeat }: SeatSelectFormProps) {
-  const { t } = useTypedI18n('common')
+  const { t } = useTypedI18n('seats')
   const [selectedRow, setSelectedRow] = useState<string>('')
   const [selectedSeat, setSelectedSeat] = useState<string>('')
 
-  // Valid rows are indices (0-based) from seats array
   const rows = seats.map((_, index) => (index + 1).toString())
 
-  // Get seats for the selected row
   const currentRowSeats = selectedRow
     ? seats[Number.parseInt(selectedRow) - 1]
     : []
 
-  // Filter available seats in the row
-  const availableSeats = currentRowSeats.filter(s => s.isAvailable)
+  const availableSeats = currentRowSeats.filter(s => s.price > 0)
 
   const handleAdd = () => {
     if (selectedRow && selectedSeat) {
@@ -35,7 +38,6 @@ export function SeatSelectForm({ seats, onAddSeat }: SeatSelectFormProps) {
       if (seat) {
         onAddSeat(seat)
         setSelectedSeat('')
-        // Optionally reset row or keep it
       }
     }
   }
@@ -44,43 +46,91 @@ export function SeatSelectForm({ seats, onAddSeat }: SeatSelectFormProps) {
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label className="text-sm font-medium">Ряд</label>
-          <Select
-            value={selectedRow}
-            onValueChange={(val) => {
-              setSelectedRow(val)
-              setSelectedSeat('')
-            }}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Выбрат.." />
-            </SelectTrigger>
-            <SelectContent>
-              {rows.map(row => (
-                <SelectItem key={row} value={row}>{row}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <label className="text-sm font-medium">{t('row')}</label>
+          <div className="hidden md:block">
+            <Select
+              value={selectedRow}
+              onValueChange={(val) => {
+                setSelectedRow(val)
+                setSelectedSeat('')
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={t('select')} />
+              </SelectTrigger>
+              <SelectContent>
+                {rows.map(row => (
+                  <SelectItem key={row} value={row}>{row}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="block md:hidden">
+            <DrawerSelect
+              value={selectedRow}
+              onValueChange={(val) => {
+                setSelectedRow(val)
+                setSelectedSeat('')
+              }}
+            >
+              <DrawerSelectTriggerComp placeholder={t('select')} />
+              <DrawerSelectContent title={t('selectRow')}>
+                {rows.map(row => (
+                  <DrawerSelectItem key={row} value={row}>
+                    {row}
+                  </DrawerSelectItem>
+                ))}
+              </DrawerSelectContent>
+            </DrawerSelect>
+          </div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Место</label>
-          <Select
-            value={selectedSeat}
-            onValueChange={setSelectedSeat}
-            disabled={!selectedRow}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Выбрать..." />
-            </SelectTrigger>
-            <SelectContent>
-              {availableSeats.map(seat => (
-                <SelectItem key={seat.column} value={seat.column.toString()}>
-                  {seat.column}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <label className="text-sm font-medium">{t('seat')}</label>
+          <div className="hidden md:block">
+            <Select
+              value={selectedSeat}
+              onValueChange={setSelectedSeat}
+              disabled={!selectedRow}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={t('select')} />
+              </SelectTrigger>
+              <SelectContent>
+                {availableSeats.map(seat => (
+                  <SelectItem key={seat.column} value={seat.column.toString()}>
+                    {seat.column}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="block md:hidden">
+            <DrawerSelect
+              value={selectedSeat}
+              onValueChange={setSelectedSeat}
+            >
+              <DrawerSelectTriggerComp
+                placeholder={t('select')}
+                className={!selectedRow ? 'opacity-50 pointer-events-none' : ''}
+              />
+              <DrawerSelectContent title={t('selectSeat')}>
+                {availableSeats.map(seat => (
+                  <DrawerSelectItem key={seat.column} value={seat.column.toString()}>
+                    <span className="text-paragraph-16">
+                      {seat.column}
+                      ,
+                      <span className="text-content-05 pl-2">
+                        {seat.price}
+                        {'  '}
+                        ₽
+                      </span>
+                    </span>
+                  </DrawerSelectItem>
+                ))}
+              </DrawerSelectContent>
+            </DrawerSelect>
+          </div>
         </div>
       </div>
 
@@ -90,7 +140,7 @@ export function SeatSelectForm({ seats, onAddSeat }: SeatSelectFormProps) {
         disabled={!selectedRow || !selectedSeat}
         onClick={handleAdd}
       >
-        Ещё билет
+        {t('moreTicket')}
       </Button>
     </div>
   )

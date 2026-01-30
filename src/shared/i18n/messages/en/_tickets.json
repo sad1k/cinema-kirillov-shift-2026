@@ -15,6 +15,26 @@
     "seat": "Seat",
     "seats": "Seats",
     "no_active_tickets": "No active tickets",
-    "no_history_tickets": "No ticket history"
+    "no_history_tickets": "No ticket history",
+    "errors": {
+      "cant_refund": "Can't refund",
+      "enter_name": "Enter name",
+      "enter_surname": "Enter surname",
+      "enter_phone": "Enter phone",
+      "card_number_error": "Invalid card number",
+      "card_expire_error": "Invalid card expiration date",
+      "card_cvv_error": "Invalid card CVV"
+    },
+    "success": {
+      "title": "Payment successful!",
+      "ticket_number": "Ticket number",
+      "film": "Film",
+      "date_and_time": "Date and time",
+      "row": "Row",
+      "seat": "Seat",
+      "info_duplicated": "All information was duplicated in SMS",
+      "order_details": "Order details",
+      "to_main": "Go to main"
+    }
   }
 }

@@ -28,24 +28,19 @@ export function TicketCard({ order, variant }: TicketCardProps) {
         setIsRefundOpen(false)
       },
       onError: () => {
-<<<<<<< HEAD
-
-=======
         setIsRefundOpen(false)
->>>>>>> dc478a81f942ca52555d4dc1bd37be3722fc3909
       },
     },
   })
 
   const filmName = order.film.name
   const ticket = order.tickets[0]
-  if (!ticket) { return null }
+  if (!ticket) {
+    return null
+  }
 
   const seanceDate = ticket.seance.date
   const seanceTime = ticket.seance.time
-
-  // eslint-disable-next-line unused-imports/no-unused-vars
-  const places = order.tickets.map(ticket => `${ticket.row} ${t('row')}, ${ticket.column} ${t('seat')}`).join(', ')
 
   const row = order.tickets[0].row
   const seats = order.tickets.map(t => t.column).join(', ')
@@ -53,7 +48,8 @@ export function TicketCard({ order, variant }: TicketCardProps) {
 
   const isCancelled = order.status === 'CANCELED'
 
-  const handleConfirm = () => {
+  const handleConfirm = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
     mutate({
       body: { orderId: order._id },
     })
@@ -61,16 +57,16 @@ export function TicketCard({ order, variant }: TicketCardProps) {
 
   return (
     <>
-      <Card className="overflow-hidden">
-        <CardContent className="p-6">
+      <Card>
+        <CardContent className="w-full">
           <div className="mb-4 flex justify-between text-sm text-muted-foreground">
             <span>{seanceDate}</span>
             <span>{seanceTime}</span>
           </div>
 
-          <h3 className="mb-2 text-lg font-bold leading-tight">{filmName}</h3>
+          <h3 className="mb-2 text-lg font-bold leading-tight text-center">{filmName}</h3>
 
-          <p className="mb-4 text-sm text-muted-foreground">
+          <p className="mb-4 text-sm text-muted-foreground text-center">
             {placesText}
           </p>
 
@@ -78,20 +74,12 @@ export function TicketCard({ order, variant }: TicketCardProps) {
             <div>
               {variant === 'active'
                 ? (
-<<<<<<< HEAD
-                    <Badge variant="secondary" className="bg-green-100 text-green-700 hover:bg-green-100 hover:text-green-700 dark:bg-green-900/30 dark:text-green-400">
-=======
                     <Badge variant="success">
->>>>>>> dc478a81f942ca52555d4dc1bd37be3722fc3909
                       {t('paid')}
                     </Badge>
                   )
                 : (
-<<<<<<< HEAD
-                    <Badge variant="destructive" className="bg-red-100 text-red-700 hover:bg-red-100 hover:text-red-700 dark:bg-red-900/30 dark:text-red-400">
-=======
                     <Badge variant={isCancelled ? 'error' : 'success'}>
->>>>>>> dc478a81f942ca52555d4dc1bd37be3722fc3909
                       {isCancelled ? t('cancelled') : t('paid')}
                     </Badge>
                   )}

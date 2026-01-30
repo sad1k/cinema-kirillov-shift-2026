@@ -2,7 +2,7 @@ import { Skeleton } from '@/shared/components/ui/skeleton'
 
 export function ProfileSkeleton() {
   return (
-    <div className="mx-auto mt-8 max-w-[600px] px-4">
+    <div className="px-4 mt-4">
       <Skeleton className="mb-6 h-8 w-32" />
       <div className="space-y-6">
         <div className="space-y-4">

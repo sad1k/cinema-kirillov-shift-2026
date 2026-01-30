@@ -7,18 +7,17 @@ import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
 import { useTypedI18n } from '@/shared/i18n/client'
-import { useSession } from '@/shared/session/session-provider'
+import { useSession } from '@/shared/providers/session/session-provider'
 import { userDetailsSchema } from '../../types'
 
 interface BookingStepTwoProps {
   onSubmit: (data: UserDetails) => void
-  handleNext: () => void
   handleBack: () => void
 }
 
-export function BookingStepTwo({ onSubmit, handleNext, handleBack }: BookingStepTwoProps) {
+export function BookingStepTwo({ onSubmit, handleBack }: BookingStepTwoProps) {
   const { user } = useSession()
-  const { t } = useTypedI18n('common')
+  const { t } = useTypedI18n('booking')
 
   const { register, handleSubmit, formState: { errors } } = useForm<UserDetails>({
     resolver: zodResolver(userDetailsSchema),
@@ -32,14 +31,17 @@ export function BookingStepTwo({ onSubmit, handleNext, handleBack }: BookingStep
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-xl font-semibold">Введите ваши данные</h2>
+      <h2 className="text-xl font-semibold">{t('enterData')}</h2>
 
       <form id="step-2-form" onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="lastname">Фамилия*</Label>
+          <Label htmlFor="lastname">
+            {t('lastname')}
+            *
+          </Label>
           <Input
             id="lastname"
-            placeholder="Фамилия"
+            placeholder={t('lastname')}
             {...register('lastname')}
           />
           {errors.lastname && (
@@ -48,10 +50,13 @@ export function BookingStepTwo({ onSubmit, handleNext, handleBack }: BookingStep
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="firstname">Имя*</Label>
+          <Label htmlFor="firstname">
+            {t('firstname')}
+            *
+          </Label>
           <Input
             id="firstname"
-            placeholder="Имя"
+            placeholder={t('firstname')}
             {...register('firstname')}
           />
           {errors.firstname && (
@@ -60,19 +65,22 @@ export function BookingStepTwo({ onSubmit, handleNext, handleBack }: BookingStep
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="middlename">Отчество</Label>
+          <Label htmlFor="middlename">{t('middlename')}</Label>
           <Input
             id="middlename"
-            placeholder="Отчество"
+            placeholder={t('middlename')}
             {...register('middlename')}
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="phone">Номер телефона*</Label>
+          <Label htmlFor="phone">
+            {t('phone')}
+            *
+          </Label>
           <Input
             id="phone"
-            placeholder="Телефон"
+            placeholder={t('phone')}
             {...register('phone')}
           />
           {errors.phone && (
@@ -85,7 +93,7 @@ export function BookingStepTwo({ onSubmit, handleNext, handleBack }: BookingStep
             {t('back')}
           </Button>
           <Button
-            onClick={handleNext}
+            type="submit"
             disabled={Object.keys(errors).length > 0}
           >
             {t('continue')}

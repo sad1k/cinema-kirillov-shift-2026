@@ -14,6 +14,14 @@
     "required": "Required field",
     "cancel": "Cancel",
     "close": "Close",
-    "error": "An error occurred"
+    "error": "An error occurred",
+    "try_again": "Try again",
+    "notFound": "Not found",
+    "notFoundDescription": "The page you are looking for does not exist.",
+    "buyTicket": "Buy ticket",
+    "metadata": {
+      "title": "Cinema",
+      "description": "Book movie tickets online"
+    }
   }
 }

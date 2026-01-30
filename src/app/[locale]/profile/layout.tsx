@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
 import { Suspense } from 'react'
-import { ProfileSkeleton } from './_components/profile-skeleton'
+import ProfileLoadingSkeleton from './loading'
 
 export default function ProfileLayout({ children }: { children: ReactNode }) {
   return (
-    <Suspense fallback={<ProfileSkeleton />}>
+    <Suspense fallback={<ProfileLoadingSkeleton />}>
       {children}
     </Suspense>
   )

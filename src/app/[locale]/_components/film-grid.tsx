@@ -14,7 +14,7 @@ export async function FilmGrid({ films, locale }: FilmGridProps) {
 
   return (
     <section className="flex flex-col gap-6">
-      <h2 className="my-6 text-title-h2">{t('home.title')}</h2>
+      <h2 className="hidden md:block my-6 text-title-h2">{t('home.title')}</h2>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {films.map(film => (

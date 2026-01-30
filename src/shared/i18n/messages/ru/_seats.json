@@ -1,0 +1,14 @@
+{
+  "seats": {
+    "screen": "Экран",
+    "row": "Ряд",
+    "seat": "Место",
+    "seatNumber": "место",
+    "select": "Выбрать...",
+    "selectRow": "Выберите ряд",
+    "selectSeat": "Выберите место",
+    "moreTicket": "Ещё билет",
+    "price": "Цена",
+    "ticket": "Билет"
+  }
+}

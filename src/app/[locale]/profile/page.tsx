@@ -1,37 +1,37 @@
 'use client'
 
-import type { I18KeyType } from '@/shared/i18n'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { LogOut } from 'lucide-react'
+import { useState } from 'react'
 
+import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { LogoutDialog } from '@/app/[locale]/profile/_components/logout-dialog'
-import { ProfileSkeleton } from '@/app/[locale]/profile/_components/profile-skeleton'
+import { HeaderController } from '@/app/_components/header-controller'
 import { getApiUsersSessionOptions, useGetApiUsersSessionSuspenseQuery, usePatchApiUsersProfileMutation } from '@/shared/api/generated'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
 import { useTypedI18n } from '@/shared/i18n/client/use-typed-i18n'
 import { useRouter } from '@/shared/i18n/i18n.routing'
-import { useSession } from '@/shared/session/session-provider'
+import { useSession } from '@/shared/providers/session/session-provider'
 
-const createProfileSchema = (t: (key: I18KeyType<'common'>) => string) => z.object({
-  lastname: z.string().min(1, t('required')),
-  firstname: z.string().min(1, t('required')),
-  middlename: z.string().min(1, t('required')),
+const profileSchema = z.object({
+  lastname: z.string().min(1, 'required'),
+  firstname: z.string().min(1, 'required'),
+  middlename: z.string().min(1, 'required'),
   phone: z.string(),
   email: z.string().email().optional().or(z.literal('')),
   city: z.string().optional(),
 })
 
-type ProfileFormValues = z.infer<ReturnType<typeof createProfileSchema>>
+type ProfileFormValues = z.infer<typeof profileSchema>
 
 export default function ProfilePage() {
   const { t } = useTypedI18n('profile')
   const { t: tCommon } = useTypedI18n('common')
-  const { data: userRaw, isLoading } = useGetApiUsersSessionSuspenseQuery()
+  const { data: userRaw } = useGetApiUsersSessionSuspenseQuery()
   const { logout } = useSession()
   const router = useRouter()
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
@@ -41,14 +41,12 @@ export default function ProfilePage() {
 
   const queryClient = useQueryClient()
 
-  const schema = createProfileSchema(tCommon)
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ProfileFormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(profileSchema),
     defaultValues: {
       lastname: user?.lastname || '',
       firstname: user?.firstname || '',
@@ -91,17 +89,21 @@ export default function ProfilePage() {
     router.push('/')
   }
 
-  if (isLoading) {
-    return <ProfileSkeleton />
-  }
-
   if (!isAuth || !user) {
     return null
   }
 
   return (
-    <div className="mx-auto mt-8 max-w-[600px] px-4">
-      <h2 className="mb-6 text-2xl font-bold text-foreground">{tCommon('profile')}</h2>
+    <div className="mt-0 max-w-[600px] md:mt-4">
+      <HeaderController
+        title="Профиль"
+        rightAction={(
+          <Button variant="ghost" size="icon" onClick={onLogoutClick} className="-ml-2">
+            <LogOut className="size-5 text-brand" />
+          </Button>
+        )}
+      />
+      <h2 className="mb-4 text-2xl font-bold text-foreground hidden md:inline-block">{tCommon('profile')}</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-4">
@@ -168,7 +170,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <Button variant="outline" type="button" onClick={onLogoutClick}>
             {tCommon('logout')}
           </Button>

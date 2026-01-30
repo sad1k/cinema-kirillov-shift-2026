@@ -12,7 +12,7 @@ import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { useTypedI18n } from '@/shared/i18n/client/use-typed-i18n'
 import { useRouter } from '@/shared/i18n/i18n.routing'
-import { useSession } from '@/shared/session/session-provider'
+import { useSession } from '@/shared/providers/session/session-provider'
 
 const createOtpSchema = (tAuth: (key: I18KeyType<'auth'>) => string) => z.object({
   phone: z.string(),
