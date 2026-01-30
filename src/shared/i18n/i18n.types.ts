@@ -5,6 +5,12 @@ export type I18nLocale = 'en' | 'ru'
 
 export type LangAll = typeof import('./messages/en/_common.json')
   & typeof import('./messages/en/_main.json')
+  & typeof import('./messages/en/_films.json')
+  & typeof import('./messages/en/_profile.json')
+  & typeof import('./messages/en/_tickets.json')
+  & typeof import('./messages/en/_auth.json')
+  & typeof import('./messages/en/_booking.json')
+  & typeof import('./messages/en/_seats.json')
 
 export type FlatLangAll = TranslationsStr<TranslationsTuple<LangAll>>
 export type Translations = FlatLangAll
@@ -16,8 +22,8 @@ type TranslationsTuple<Translation> = {
 
 type TranslationsStr<Translation> = {
   [K in keyof Translation]: Translation[K] extends string[]
-    ? Join<Translation[K], '.'>
-    : Translation[K];
+  ? Join<Translation[K], '.'>
+  : Translation[K];
 }
 
 export type I18KeyType<Ns extends keyof Translations> = Translations[Ns]
@@ -40,5 +46,5 @@ export interface I18nReturn<Ns extends keyof Translations> {
 declare global {
   // Use type safe message keys with `next-intl`
 
-  interface IntlMessages extends LangAll {}
+  interface IntlMessages extends LangAll { }
 }

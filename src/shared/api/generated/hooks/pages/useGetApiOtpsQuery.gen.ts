@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import type { TanstackQuerySettings } from "@siberiacancode/apicraft";
 
-import { getApiOtps } from "..\\..\\requests\\pages\\getApiOtps.gen";
+import { getApiOtps } from "../../requests/pages/getApiOtps.gen";
 
 export const useGetApiOtpsQuery = (settings?: TanstackQuerySettings<typeof getApiOtps>) => useQuery({
     queryKey: ["getApiOtps"],

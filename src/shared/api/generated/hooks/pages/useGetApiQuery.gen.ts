@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import type { TanstackQuerySettings } from "@siberiacancode/apicraft";
 
-import { getApi } from "..\\..\\requests\\pages\\getApi.gen";
+import { getApi } from "../../requests/pages/getApi.gen";
 
 export const useGetApiQuery = (settings?: TanstackQuerySettings<typeof getApi>) => useQuery({
     queryKey: ["getApi"],

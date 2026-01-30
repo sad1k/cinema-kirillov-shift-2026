@@ -1,0 +1,14 @@
+{
+  "seats": {
+    "screen": "Screen",
+    "row": "Row",
+    "seat": "Seat",
+    "seatNumber": "seat",
+    "select": "Select...",
+    "selectRow": "Select row",
+    "selectSeat": "Select seat",
+    "moreTicket": "Add ticket",
+    "price": "Price",
+    "ticket": "Ticket"
+  }
+}

@@ -1,14 +1,27 @@
 {
   "common": {
-    "testCommon": "testValue",
-    "addPet": "Add Pet",
-    "loginSignUp": "Login / Sign up",
-    "loadMorePets": "Load more Pets",
-    "navigation": {
-      "home": "Home",
-      "contest": "Contest",
-      "leaderboard": "Leaderboard",
-      "myPets": "My Pets"
+    "login": "Log in",
+    "details": "Details",
+    "film": "Movie",
+    "kinopoisk": "Kinopoisk",
+    "back": "Back",
+    "continue": "Continue",
+    "expand": "expand",
+    "profile": "Profile",
+    "tickets": "Tickets",
+    "logout": "Log out",
+    "retry": "Send again",
+    "required": "Required field",
+    "cancel": "Cancel",
+    "close": "Close",
+    "error": "An error occurred",
+    "try_again": "Try again",
+    "notFound": "Not found",
+    "notFoundDescription": "The page you are looking for does not exist.",
+    "buyTicket": "Buy ticket",
+    "metadata": {
+      "title": "Cinema",
+      "description": "Book movie tickets online"
     }
   }
 }

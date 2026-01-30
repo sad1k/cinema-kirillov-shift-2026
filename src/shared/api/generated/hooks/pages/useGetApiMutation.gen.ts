@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import type { TanstackMutationSettings } from "@siberiacancode/apicraft";
 
-import { getApi } from "..\\..\\requests\\pages\\getApi.gen";
+import { getApi } from "../../requests/pages/getApi.gen";
 
 export const useGetApiMutation = (settings?: TanstackMutationSettings<typeof getApi>) => useMutation({
     mutationKey: ["getApi"],
