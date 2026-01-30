@@ -106,7 +106,7 @@ export default function LoginPage() {
         <div className="space-y-4">
           <Input
             {...register('phone')}
-            placeholder="Телефон"
+            placeholder={tAuth('phone_placeholder')}
             disabled={otpSent}
           />
           {errors.phone && (
@@ -117,7 +117,7 @@ export default function LoginPage() {
             <>
               <Input
                 {...register('code')}
-                placeholder="Проверочный код"
+                placeholder={tAuth('code_placeholder')}
                 type="number"
               />
               {errors?.code && (

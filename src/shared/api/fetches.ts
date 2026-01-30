@@ -1,3 +1,5 @@
+/* eslint-disable node/prefer-global/process */
+/* eslint-disable ts/ban-ts-comment */
 import fetches from '@siberiacancode/fetches'
 import { deleteCookie, getCookie } from 'cookies-next'
 
@@ -11,7 +13,13 @@ export const instance = fetches.create({
   },
 })
 
+import https from 'https'
+
 instance.interceptors.request.use(async (config) => {
+  if (process.env.NODE_TLS_REJECT_UNAUTHORIZED === '0') {
+    // @ts-expect-error
+    config.agent = new https.Agent({ rejectUnauthorized: false })
+  }
   const token = getCookie('token')
   if (token) {
     // const cookieStore = await import('next/headers').then(mod => mod.cookies())

@@ -2,6 +2,8 @@
   "auth": {
     "auth_tooltip": "Введите номер телефона для входа в личный кабинет",
     "authorization": "Авторизация",
-    "code_error": "Код должен быть числом"
+    "code_error": "Код должен быть числом",
+    "phone_placeholder": "Телефон",
+    "code_placeholder": "Проверочный код"
   }
 }

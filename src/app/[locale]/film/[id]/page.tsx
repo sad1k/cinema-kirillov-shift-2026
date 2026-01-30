@@ -38,18 +38,6 @@ export async function generateMetadata({ params }: FilmPageProps): Promise<Metad
   return generateFilmMetadata({ film: response.data.film, locale })
 }
 
-export async function generateStaticParams() {
-  const response = await getApiCinemaFilms()
-
-  if (!response.data.success || !response.data.films) {
-    return []
-  }
-
-  return response.data.films.map((film: Film) => ({
-    id: film.id,
-  }))
-}
-
 export default async function FilmPage({ params }: FilmPageProps) {
   const { id, locale } = await params
 
