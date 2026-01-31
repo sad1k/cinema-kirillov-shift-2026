@@ -4,7 +4,7 @@ import type { Film } from '@/shared/api/generated'
 import { env } from '@/shared/config/env'
 import { AGE_RATING_MAP } from '../constants/age-rating-map'
 
-const SITE_URL = env.NEXT_PUBLIC_SITE_URL
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
 
 export interface FilmMetadataParams {
   film: Film
@@ -13,7 +13,7 @@ export interface FilmMetadataParams {
 
 export function generateFilmMetadata({ film, locale }: FilmMetadataParams): Metadata {
   const posterUrl = `${SITE_URL}/api${film.img}`
-  const filmUrl = `${SITE_URL}/${locale}/film/${film.id}`
+  const filmUrl = `${SITE_URL}/${locale ?? 'ru'}/film/${film.id}`
 
   const ageRating = AGE_RATING_MAP[film.ageRating]
   const releaseYear = film.releaseDate ? new Date(film.releaseDate).getFullYear() : ''

@@ -5,12 +5,12 @@ import createNextIntlPlugin from 'next-intl/plugin'
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
 const nextConfig: NextConfig = {
-
   experimental: {
     viewTransition: true,
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   },
   images: {
     remotePatterns: [

@@ -13,13 +13,7 @@ export const instance = fetches.create({
   },
 })
 
-import https from 'https'
-
 instance.interceptors.request.use(async (config) => {
-  if (process.env.NODE_TLS_REJECT_UNAUTHORIZED === '0') {
-    // @ts-expect-error
-    config.agent = new https.Agent({ rejectUnauthorized: false })
-  }
   const token = getCookie('token')
   if (token) {
     // const cookieStore = await import('next/headers').then(mod => mod.cookies())
