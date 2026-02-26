@@ -7,6 +7,7 @@ import { LangSwitcher } from '@/app/_components/lang-switcher'
 import { getApiCinemaFilms } from '@/shared/api/generated'
 import { getTypedServerI18n } from '@/shared/i18n/server'
 import { ThemeToggle } from '@/shared/providers/theme/theme-toggle'
+import { generateHomeMetadata } from '@/shared/seo/metadata'
 import { FilmGrid } from './_components/film-grid'
 
 interface HomePageProps {
@@ -39,10 +40,5 @@ export default async function HomePage({ params }: HomePageProps) {
 
 export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
   const { locale } = await params
-  const { t } = await getTypedServerI18n(locale, 'main')
-
-  return {
-    title: t('home.meta.title'),
-    description: t('home.meta.description'),
-  }
+  return generateHomeMetadata(locale)
 }
