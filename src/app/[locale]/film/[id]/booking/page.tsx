@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: BookingPageProps): Promise<Me
 
   return {
     title: t('buyTicket'),
+    robots: { index: false, follow: false },
   }
 }
 
