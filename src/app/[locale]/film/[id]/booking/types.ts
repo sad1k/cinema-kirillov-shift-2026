@@ -7,17 +7,6 @@ export interface Seat {
   price: number
 }
 
-export interface BookingState {
-  currentStep: 1 | 2 | 3
-  selectedSeats: Seat[]
-  filmId: string
-  seanceParams: {
-    date: string
-    time: string
-    hall: string
-  }
-}
-
 export const userDetailsSchema = z.object({
   firstname: z.string().min(1, 'enter_name'),
   lastname: z.string().min(1, 'enter_surname'),
