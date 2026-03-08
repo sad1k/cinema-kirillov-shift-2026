@@ -2,28 +2,42 @@
 import type { Metadata } from 'next'
 import type { Film } from '@/shared/api/generated'
 
+import { getTranslations } from 'next-intl/server'
 import { AGE_RATING_MAP } from '../constants/age-rating-map'
+import { locales } from '../i18n/i18n.consts'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
+
+function buildAlternates(path: string, canonicalLocale: string) {
+  const languages = Object.fromEntries(
+    locales.map(l => [l, `${SITE_URL}/${l}${path}`]),
+  )
+
+  return {
+    canonical: `${SITE_URL}/${canonicalLocale}${path}`,
+    languages,
+  }
+}
 
 export interface FilmMetadataParams {
   film: Film
   locale: string
 }
 
-export function generateFilmMetadata({ film, locale }: FilmMetadataParams): Metadata {
+export async function generateFilmMetadata({ film, locale }: FilmMetadataParams): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'films' })
+
   const posterUrl = `${SITE_URL}/api${film.img}`
-  const filmUrl = `${SITE_URL}/${locale ?? 'ru'}/film/${film.id}`
+  const filmUrl = `${SITE_URL}/${locale}/film/${film.id}`
 
   const ageRating = AGE_RATING_MAP[film.ageRating]
   const releaseYear = film.releaseDate ? new Date(film.releaseDate).getFullYear() : ''
 
+  const title = `${film.name} (${film.originalName}) — ${t('meta.titleSuffix')}`
   const description = `${film.name} (${film.originalName}) — ${ageRating}. ${film.country?.name || ''}, ${releaseYear}. ${film.description.slice(0, 160)}`
 
   return {
-    title: locale === 'ru'
-      ? `${film.name} (${film.originalName}) — купить билет`
-      : `${film.name} (${film.originalName}) — buy ticket`,
+    title,
     description,
     openGraph: {
       type: 'video.movie',
@@ -47,25 +61,16 @@ export function generateFilmMetadata({ film, locale }: FilmMetadataParams): Meta
       description,
       images: [posterUrl],
     },
-    alternates: {
-      canonical: filmUrl,
-      languages: {
-        ru: `${SITE_URL}/ru/film/${film.id}`,
-        en: `${SITE_URL}/en/film/${film.id}`,
-      },
-    },
+    alternates: buildAlternates(`/film/${film.id}`, locale),
   }
 }
 
-export function generateHomeMetadata(locale: string): Metadata {
-  const siteUrl = `${SITE_URL}/${locale}`
+export async function generateHomeMetadata(locale: string): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'main' })
 
-  const title = locale === 'ru'
-    ? 'SHIFT CINEMA — Афиша'
-    : 'SHIFT CINEMA — Schedule'
-  const description = locale === 'ru'
-    ? 'Смотрите лучшие фильмы в кинотеатре ШИФТ CINEMA. Купить билеты онлайн, расписание сеансов.'
-    : 'Watch the best movies at SHIFT CINEMA. Buy tickets online, session schedule.'
+  const siteUrl = `${SITE_URL}/${locale}`
+  const title = t('home.meta.title')
+  const description = t('home.meta.description')
 
   return {
     title,
@@ -83,13 +88,7 @@ export function generateHomeMetadata(locale: string): Metadata {
       title,
       description,
     },
-    alternates: {
-      canonical: siteUrl,
-      languages: {
-        ru: `${SITE_URL}/ru`,
-        en: `${SITE_URL}/en`,
-      },
-    },
+    alternates: buildAlternates('', locale),
   }
 }
 
