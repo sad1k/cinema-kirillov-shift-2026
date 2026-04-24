@@ -127,3 +127,39 @@ export function generateFilmJsonLd(film: Film) {
     }),
   }
 }
+
+export function generateFilmJsonLd(film: Film) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Movie',
+    'name': film.name,
+    'alternateName': film.originalName,
+    'description': film.description,
+    'image': `${SITE_URL}/api${film.img}`,
+    'datePublished': film.releaseDate,
+    'duration': `PT${film.runtime}M`,
+    'contentRating': AGE_RATING_MAP[film.ageRating],
+    'genre': film.genres,
+    'director': film.directors.map(d => ({
+      '@type': 'Person',
+      'name': d.fullName,
+    })),
+    'actor': film.actors.map(a => ({
+      '@type': 'Person',
+      'name': a.fullName,
+    })),
+    ...(film.country?.name && {
+      countryOfOrigin: {
+        '@type': 'Country',
+        'name': film.country.name,
+      },
+    }),
+    ...(film.userRatings?.kinopoisk && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        'ratingValue': film.userRatings.kinopoisk,
+        'bestRating': 10,
+      },
+    }),
+  }
+}
