@@ -14,9 +14,10 @@ import { parseYear } from '@/shared/lib/utils'
 interface FilmCardProps {
   film: Film
   locale: I18nLocale
+  priority?: boolean
 }
 
-export async function FilmCard({ film, locale }: FilmCardProps) {
+export async function FilmCard({ film, locale, priority = false }: FilmCardProps) {
   const { t } = await getTypedServerI18n(locale, 'common')
   const releaseYear = parseYear(film.releaseDate)
   const ageRating = AGE_RATING_MAP[film.ageRating]
@@ -25,13 +26,14 @@ export async function FilmCard({ film, locale }: FilmCardProps) {
 
   return (
     <article className="flex h-full flex-col gap-3">
-      <div className="relative overflow-hidden rounded-2xl rounded-br-xs">
+      <div className="relative h-[300px] w-full overflow-hidden rounded-2xl rounded-br-xs">
         <Image
           src={`${env.NEXT_PUBLIC_API_URL}/api${film.img}`}
           alt={film.name}
-          width={300}
-          height={300}
-          className="h-[300px] w-full object-cover rounded-2xl"
+          fill
+          sizes="(max-width: 768px) 100vw, 300px"
+          className="object-cover rounded-2xl"
+          priority={priority}
         />
 
         <div

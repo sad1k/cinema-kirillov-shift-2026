@@ -78,6 +78,7 @@ export function BookingStepsContainer({ filmId, date, time, hall }: BookingSteps
       },
     }, {
       onSuccess: (data) => {
+        sessionStorage.setItem('last_order', JSON.stringify(data.data.order))
         router.push(`/film/${filmId}/booking/success?orderId=${data.data.order._id}`)
       },
     })

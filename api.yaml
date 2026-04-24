@@ -808,7 +808,7 @@ info:
   contact: {}
 tags: []
 servers:
-  - url: https://shift-intensive.ru/
+  - url: https://juniorsbootcamp.ru/
 components:
   securitySchemes:
     bearer:
