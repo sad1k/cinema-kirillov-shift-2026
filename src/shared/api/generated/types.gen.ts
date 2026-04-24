@@ -2348,5 +2348,5 @@ export type PizzaControllerCancelPizzaOrderResponses = {
 export type PizzaControllerCancelPizzaOrderResponse = PizzaControllerCancelPizzaOrderResponses[keyof PizzaControllerCancelPizzaOrderResponses];
 
 export type ClientOptions = {
-    baseUrl: 'https://shift-intensive.ru/' | (string & {});
+    baseUrl: 'https://juniorsbootcamp.ru/' | (string & {});
 };

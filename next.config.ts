@@ -13,10 +13,11 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'shift-intensive.ru',
+        hostname: 'juniorsbootcamp.ru',
         pathname: '/api/**',
       },
     ],

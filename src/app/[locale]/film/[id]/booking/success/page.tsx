@@ -1,11 +1,12 @@
 'use client'
 
+import type { CinemaOrder } from '@/shared/api/generated'
 import { format } from 'date-fns'
 import { enUS, ru } from 'date-fns/locale'
 import { Loader2, X } from 'lucide-react'
 import { useLocale } from 'next-intl'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { HeaderController } from '@/app/_components/header-controller'
 import { useGetApiCinemaOrdersQuery } from '@/shared/api/generated/hooks/cinema/useGetApiCinemaOrdersQuery.gen'
 import { Button } from '@/shared/components/ui/button'
@@ -28,13 +29,32 @@ export default function SuccessOrderPage() {
   const searchParams = useSearchParams()
   const orderId = searchParams.get('orderId')
 
-  const { data, isLoading } = useGetApiCinemaOrdersQuery()
+  const { data, isLoading: isQueryLoading } = useGetApiCinemaOrdersQuery()
+  const [savedOrder, setSavedOrder] = useState<CinemaOrder>()
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem('last_order')
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved)
+        if (parsed._id === orderId) {
+          setSavedOrder(parsed)
+        }
+      }
+      catch (e) {
+        console.error('Failed to parse saved order', e)
+      }
+    }
+  }, [orderId])
 
   const order = useMemo(() => {
+    if (savedOrder && savedOrder._id === orderId) {
+      return savedOrder
+    }
     return data?.data?.orders.find(order => order._id === orderId)
-  }, [data, orderId])
+  }, [data, orderId, savedOrder])
 
-  if (isLoading) {
+  if (isQueryLoading && !savedOrder) {
     return (
       <div className="flex h-screen items-center justify-center">
         <Loader2 className="animate-spin text-primary" />
@@ -43,7 +63,7 @@ export default function SuccessOrderPage() {
   }
 
   if (!order) {
-    return null
+    return <Loader2 className="animate-spin text-primary" />
   }
 
   const { film, tickets, orderNumber } = order

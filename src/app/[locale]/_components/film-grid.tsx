@@ -17,8 +17,13 @@ export async function FilmGrid({ films, locale }: FilmGridProps) {
       <h2 className="hidden md:block my-6 text-title-h2">{t('home.title')}</h2>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        {films.map(film => (
-          <FilmCard key={film.id} film={film} locale={locale} />
+        {films.map((film, index) => (
+          <FilmCard
+            key={film.id}
+            film={film}
+            locale={locale}
+            priority={index < 3}
+          />
         ))}
       </div>
     </section>
