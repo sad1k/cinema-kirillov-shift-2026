@@ -9,8 +9,13 @@ import { useRouter } from '@/shared/i18n/i18n.routing'
 import { BookingStepOne } from './steps/booking-step-one'
 import { BookingStepSkeleton } from './steps/booking-step-skeleton'
 import { BookingStepThree } from './steps/booking-step-three'
-
 import { BookingStepTwo } from './steps/booking-step-two'
+import { useStepper } from './use-stepper'
+
+interface StepConfig {
+  titleKey: 'step1Title' | 'step2Title' | 'step3Title'
+  component: React.ReactNode
+}
 
 interface BookingStepsContainerProps {
   filmId: string
@@ -23,24 +28,25 @@ export function BookingStepsContainer({ filmId, date, time, hall }: BookingSteps
   const { t } = useTypedI18n('booking')
   const router = useRouter()
 
-  const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1)
   const [selectedSeats, setSelectedSeats] = useState<Seat[]>([])
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null)
 
   const { mutate: pay, isPending } = usePostApiCinemaPaymentMutation()
 
+  const { currentStep, totalSteps, progress, goNext, goBack, goTo } = useStepper({
+    totalSteps: 3,
+  })
+
   const handleBack = () => {
-    if (currentStep === 1) {
+    const shouldExit = goBack()
+    if (shouldExit) {
       router.back()
-    }
-    else {
-      setCurrentStep(prev => (prev - 1) as 1 | 2 | 3)
     }
   }
 
   const handleStepTwoSubmit = (data: UserDetails) => {
     setUserDetails(data)
-    setCurrentStep(3)
+    goTo(3)
   }
 
   const handlePayment = (paymentData: PaymentDetails) => {
@@ -77,21 +83,58 @@ export function BookingStepsContainer({ filmId, date, time, hall }: BookingSteps
     })
   }
 
+  const steps: StepConfig[] = [
+    {
+      titleKey: 'step1Title',
+      component: (
+        <Suspense fallback={<BookingStepSkeleton />}>
+          <BookingStepOne
+            filmId={filmId}
+            date={date}
+            time={time}
+            hall={hall}
+            selectedSeats={selectedSeats}
+            onChange={setSelectedSeats}
+            handleNext={goNext}
+            handleBack={handleBack}
+          />
+        </Suspense>
+      ),
+    },
+    {
+      titleKey: 'step2Title',
+      component: (
+        <BookingStepTwo
+          onSubmit={handleStepTwoSubmit}
+          handleBack={handleBack}
+        />
+      ),
+    },
+    {
+      titleKey: 'step3Title',
+      component: (
+        <BookingStepThree
+          onSubmit={handlePayment}
+          onBack={handleBack}
+          isLoading={isPending}
+        />
+      ),
+    },
+  ]
+
+  const currentStepConfig = steps[currentStep - 1]
+
   return (
     <div className="flex flex-col gap-8 w-full md:w-fit">
-      {currentStep === 1 && (
-        <HeaderController title={t('step1Title')} leftAction="back" onLeftClick={handleBack} />
-      )}
-      {currentStep === 2 && (
-        <HeaderController title={t('step2Title')} leftAction="back" onLeftClick={handleBack} />
-      )}
-      {currentStep === 3 && (
-        <HeaderController title={t('step3Title')} leftAction="back" onLeftClick={handleBack} />
-      )}
+      <HeaderController
+        title={t(currentStepConfig.titleKey)}
+        leftAction="back"
+        onLeftClick={handleBack}
+      />
       <div className="flex flex-col gap-2">
-        <h1 className="text-title-h2">{t('step1Title')}</h1>
+        <h1 className="text-title-h2">{t(currentStepConfig.titleKey)}</h1>
         <div className="flex items-center gap-2">
-          <Progress value={currentStep * 100 / 3} />
+          <Progress value={progress} />
         </div>
         <p className="text-paragraph-14 text-muted-foreground">
           {t('step')}
@@ -100,40 +143,12 @@ export function BookingStepsContainer({ filmId, date, time, hall }: BookingSteps
           {' '}
           {t('of')}
           {' '}
-          3
+          {totalSteps}
         </p>
       </div>
 
       <div className="min-h-[400px]">
-        {currentStep === 1 && (
-          <Suspense fallback={<BookingStepSkeleton />}>
-            <BookingStepOne
-              filmId={filmId}
-              date={date}
-              time={time}
-              hall={hall}
-              selectedSeats={selectedSeats}
-              onChange={setSelectedSeats}
-              handleNext={() => setCurrentStep(2)}
-              handleBack={handleBack}
-            />
-          </Suspense>
-        )}
-
-        {currentStep === 2 && (
-          <BookingStepTwo
-            onSubmit={handleStepTwoSubmit}
-            handleBack={handleBack}
-          />
-        )}
-
-        {currentStep === 3 && (
-          <BookingStepThree
-            onSubmit={handlePayment}
-            onBack={handleBack}
-            isLoading={isPending}
-          />
-        )}
+        {currentStepConfig.component}
       </div>
     </div>
   )

@@ -7,6 +7,9 @@
     "Blue": "Синий зал",
     "Purple": "Фиолетовый зал",
     "Green": "Зеленый зал",
-    "hallName": "{name}"
+    "hallName": "{name}",
+    "meta": {
+      "titleSuffix": "купить билет"
+    }
   }
 }

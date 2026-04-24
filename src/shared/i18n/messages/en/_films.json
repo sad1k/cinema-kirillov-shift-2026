@@ -7,6 +7,9 @@
     "Blue": "Blue Hall",
     "Purple": "Purple Hall",
     "Green": "Green Hall",
-    "hallName": "{name}"
+    "hallName": "{name}",
+    "meta": {
+      "titleSuffix": "buy ticket"
+    }
   }
 }
